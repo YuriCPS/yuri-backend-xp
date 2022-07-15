@@ -6,7 +6,8 @@
   "scripts": {
     "test": "test",
     "start": "node index.js",
-    "dev": "nodemon /index.js"
+    "dev": "nodemon index.js",
+    "seed": "node database/restoreDb.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
   "dependencies": {
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "mysql-import": "^5.0.21",
     "mysql2": "^2.3.3"
   },
   "devDependencies": {
