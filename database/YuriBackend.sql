@@ -7,6 +7,7 @@ USE YuriBackend;
 CREATE TABLE clientes (
     codCliente INT NOT NULL auto_increment,
     nomeCliente VARCHAR(30) NOT NULL,
+    emailCliente VARCHAR(50) NOT NULL,
     senha VARCHAR(30) NOT NULL,
     PRIMARY KEY(codCliente)
 ) ENGINE=INNODB;
@@ -63,14 +64,14 @@ CREATE TABLE carteiras (
 
 SET SQL_SAFE_UPDATES = 0;
 
-INSERT INTO YuriBackend.clientes (nomeCliente, senha) VALUES
-    ("Yuri", "senha123"),
-    ("Carlos", "senha123"),
-    ("Fernando", "senha123"),
-    ("José", "senha123");
+INSERT INTO YuriBackend.clientes (nomeCliente, emailCliente, senha) VALUES
+    ("Yuri", "yuri@yahoo.com", "senha123"),
+    ("Carlos", "carlos@hotmail.com", "senha123"),
+    ("Fernando", "fernando@gmail.com", "senha123"),
+    ("José", "jose@xpinc.com", "senha123");
 
 INSERT INTO YuriBackend.ativos (codAtivo, nomeAtivo, QtdeAtivo, Valor) VALUES
-	  ("PETR3", "PETROBRAS ON N2", 500, 30.27 ),
+	("PETR3", "PETROBRAS ON N2", 500, 30.27 ),
     ("VALE3", "VALE ON NM", 500, 67.81 ),
     ("ABEV3", "AMBEV S/A ON", 500, 14.69 ),
     ("ITUB3", "ITAUUNIBANCO ON N1", 500, 19.62 ),
