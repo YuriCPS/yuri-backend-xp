@@ -1,0 +1,31 @@
+{
+  "name": "yuri-backend-xp",
+  "version": "1.0.0",
+  "description": "Desafio do backend com API e banco de dados pra processo seletivo da turma XP",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YuriCPS/yuri-backend-xp.git"
+  },
+  "keywords": [
+    "backend",
+    "api",
+    "rest",
+    "express"
+  ],
+  "author": "yuricps@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/YuriCPS/yuri-backend-xp/issues"
+  },
+  "homepage": "https://github.com/YuriCPS/yuri-backend-xp#readme",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.19"
+  }
+}
