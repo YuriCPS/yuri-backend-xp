@@ -4,7 +4,9 @@
   "description": "Desafio do backend com API e banco de dados pra processo seletivo da turma XP",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "node index.js",
+    "dev": "nodemon /index.js"
   },
   "repository": {
     "type": "git",
@@ -25,10 +27,10 @@
   "dependencies": {
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "mysql2": "^2.3.3",
-    "nodemon": "^2.0.19"
+    "mysql2": "^2.3.3"
   },
   "devDependencies": {
-    "eslint": "^8.19.0"
+    "eslint": "^8.19.0",
+    "nodemon": "^2.0.19"
   }
 }
