@@ -1,10 +1,10 @@
 const connection = require('../database/dbConnection');
 
-const verifyClient = async ({ email, password }) => {
+const verifyClient = async ({ email, senha }) => {
   const clientInfos = await connection.query(`
     SELECT * FROM clientes
-    WHERE email = ? AND senha = ?
-    `, [email, password]);
+    WHERE emailCliente = ? AND senha = ?
+    `, [email, senha]);
 
   return clientInfos;
 }

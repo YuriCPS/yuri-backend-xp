@@ -1,16 +1,18 @@
 const loginModel = require('../models/login');
 const { createToken } = require('../utils/jwt');
 
-const verifyClient = async ({ email, password }) => {
-  const clientInfos = await loginModel.verifyClient({ email, password });
+const verifyClient = async ({ email, senha }) => {
+  const [clientInfos] = await loginModel.verifyClient({ email, senha });
 
   if (clientInfos.length === 0) {
     return false;
   }
 
-  const token = createToken(clientInfos);
+  // Remove a senha para o payload do token
+  const payload = clientInfos[0];
+  delete payload.senha;
 
-  return token;
+  return createToken(payload);
 };
 
 module.exports = {
