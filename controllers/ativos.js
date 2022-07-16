@@ -40,8 +40,27 @@ const getByClient = async (req, res, next) => {
   }
 }
 
+const getByCode = async (req, res, next) => {
+  const { codAtivo } = req.params;
+
+  try {
+    const [ativo] = await ativosServices.getByCode(codAtivo);
+
+    if (ativo.length === 0) {
+      return res.status(404).json({
+        message: 'Ativo não encontrado'
+      });
+    }
+
+    return res.status(200).json(ativo);
+  } catch (error) {
+    next(error);
+  }
+}
+
 
 module.exports = {
   getAll,
-  getByClient
+  getByClient,
+  getByCode,
 }
