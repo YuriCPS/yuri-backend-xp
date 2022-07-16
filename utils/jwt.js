@@ -6,7 +6,6 @@ const config = {
 };
 
 const secret = process.env.JWT_SECRET;
-console.log(secret);
 
 const createToken = (infos) => {
   const token = jwt.sign(infos, secret, config);
