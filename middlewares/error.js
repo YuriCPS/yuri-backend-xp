@@ -1,4 +1,4 @@
-module.exports = (err, req, res) => {
+module.exports = (err, _req, res) => {
   console.log('Erro na aplicação!', err);
 
   if (err.status) {

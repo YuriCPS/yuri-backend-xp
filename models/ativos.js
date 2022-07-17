@@ -16,8 +16,8 @@ const getByCode = async (codAtivo) => connection.query(`
   WHERE codAtivo = ?
   `, [codAtivo]);
 
-  module.exports = {
-    getAll,
-    getByClient,
-    getByCode,
-  }
+module.exports = {
+  getAll,
+  getByClient,
+  getByCode,
+}
