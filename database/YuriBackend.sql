@@ -32,6 +32,7 @@ CREATE TABLE movimentacoes (
     codCliente INT NOT NULL,
     Tipo VARCHAR(30) NOT NULL,
     Valor DECIMAL(8,2) NOT NULL,
+    Horario DATETIME DEFAULT NOW(),
     PRIMARY KEY(codMovimentacao),
     FOREIGN KEY (codCliente)
     	REFERENCES clientes (codCliente)
@@ -44,6 +45,7 @@ CREATE TABLE negociacoes (
     Tipo VARCHAR(30) NOT NULL,
     QtdeAtivo INT NOT NULL,
     Valor DECIMAL(8,2) NOT NULL,
+    Horario DATETIME DEFAULT NOW(),
     PRIMARY KEY(codNegociacao),
     FOREIGN KEY (codCliente)
     	REFERENCES clientes (codCliente),

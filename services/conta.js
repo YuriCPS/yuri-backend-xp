@@ -12,6 +12,23 @@ const getBalance = async (codCliente) => {
   };
 }
 
+const deposit = async (codCliente, valor) => {
+  const [balance] = await contaModels.getBalance(codCliente);
+  const valorDecimal = valor.toFixed(2);
+  const newBalance = (Number(balance[0].Saldo) + valor).toFixed(2);
+
+  await contaModels.updateMovimentations(codCliente, "deposito", valorDecimal);
+  await contaModels.updateBalance(codCliente, newBalance);
+
+  return {
+    codCliente,
+    message: `Depósito de R$ ${valorDecimal} realizado com sucesso!`,
+    SaldoAnterior: balance[0].Saldo,
+    Saldo: newBalance,
+  };
+}
+
 module.exports = {
   getBalance,
+  deposit,
 }
