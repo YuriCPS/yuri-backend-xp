@@ -14,10 +14,11 @@ const getBalance = async (codCliente) => {
 
 const deposit = async (codCliente, valor) => {
   const [balance] = await contaModels.getBalance(codCliente);
-  const valorDecimal = valor.toFixed(2);
-  const newBalance = (Number(balance[0].Saldo) + valor).toFixed(2);
+  const valorDecimal = Number(valor)
+  const SaldoAnterior = Number(balance[0].Saldo);
+  const newBalance = (SaldoAnterior + valorDecimal).toFixed(2);
 
-  await contaModels.updateMovimentations(codCliente, "deposito", valorDecimal);
+  await contaModels.updateMovimentation(codCliente, "deposito", valorDecimal);
   await contaModels.updateBalance(codCliente, newBalance);
 
   return {
@@ -28,7 +29,31 @@ const deposit = async (codCliente, valor) => {
   };
 }
 
+const withdraw = async (codCliente, valor) => {
+  const [balance] = await contaModels.getBalance(codCliente);
+  const valorDecimal = Number(valor).toFixed(2);
+  const newBalance = (Number(balance[0].Saldo) - valorDecimal).toFixed(2);
+
+  if (newBalance < 0) {
+    return {
+      status:406,
+      message: `Saldo atual de R$ ${balance[0].Saldo} é insuficiente para realizar saque de R$ ${valorDecimal}!`,
+    }
+  }
+
+  await contaModels.updateMovimentation(codCliente, "saque", valorDecimal);
+  await contaModels.updateBalance(codCliente, newBalance);
+
+  return {
+    codCliente,
+    message: `Saque de R$ ${valorDecimal} realizado com sucesso!`,
+    SaldoAnterior: balance[0].Saldo,
+    Saldo: newBalance,
+  };
+}
+
 module.exports = {
   getBalance,
   deposit,
+  withdraw,
 }

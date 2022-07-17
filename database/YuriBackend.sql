@@ -16,13 +16,13 @@ CREATE TABLE ativos (
     codAtivo VARCHAR(5) NOT NULL,
     nomeAtivo VARCHAR(30) NOT NULL,
     QtdeAtivo INT NOT NULL,
-    Valor DECIMAL(8,2) NOT NULL,
+    Valor DECIMAL(12,2) NOT NULL,
     PRIMARY KEY(codAtivo)
 ) ENGINE=INNODB;
 
 CREATE TABLE contas (
     codConta INT NOT NULL,
-    Saldo DECIMAL(8,2) NOT NULL,
+    Saldo DECIMAL(12,2) NOT NULL,
     FOREIGN KEY (codConta)
     	REFERENCES clientes (codCliente)
 ) ENGINE=INNODB;
@@ -31,7 +31,7 @@ CREATE TABLE movimentacoes (
     codMovimentacao INT NOT NULL auto_increment,
     codCliente INT NOT NULL,
     Tipo VARCHAR(30) NOT NULL,
-    Valor DECIMAL(8,2) NOT NULL,
+    Valor DECIMAL(12,2) NOT NULL,
     Horario DATETIME DEFAULT NOW(),
     PRIMARY KEY(codMovimentacao),
     FOREIGN KEY (codCliente)
@@ -44,7 +44,7 @@ CREATE TABLE negociacoes (
     codAtivo VARCHAR(5) NOT NULL,
     Tipo VARCHAR(30) NOT NULL,
     QtdeAtivo INT NOT NULL,
-    Valor DECIMAL(8,2) NOT NULL,
+    Valor DECIMAL(12,2) NOT NULL,
     Horario DATETIME DEFAULT NOW(),
     PRIMARY KEY(codNegociacao),
     FOREIGN KEY (codCliente)

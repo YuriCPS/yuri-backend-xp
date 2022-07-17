@@ -39,7 +39,31 @@ const deposit = async (req, res, next) => {
   }
 }
 
+const withdraw = async (req, res, next) => {
+  const { codCliente, valor } = req.body;
+  const { authorization } = req.headers;
+  const { codCliente: tokenCodClient } = verifyToken(authorization);
+
+  try {
+    // O cliente não pode fazer um saque para outro cliente
+    if (Number(codCliente) !== tokenCodClient) {
+      return res.status(401).json({ message: 'Usuário não autorizado!' });
+    }
+
+    const response = await contaServices.withdraw(codCliente, valor);
+
+    if (response.status) {
+      return res.status(response.status).json({ message: response.message });
+    }
+
+    return res.status(200).json(response);
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   getBalance,
   deposit,
+  withdraw,
 }
