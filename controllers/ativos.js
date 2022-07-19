@@ -2,7 +2,7 @@ const ativosServices = require('../services/ativos');
 const getValues = require('../utils/getValues');
 const { verifyToken } = require('../utils/jwt');
 
-const getAll = async (req, res, next) => {
+const getAll = async (_req, res, next) => {
   try {
     const [ativos] = await ativosServices.getAll();
 
