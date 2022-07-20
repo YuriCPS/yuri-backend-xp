@@ -21,7 +21,7 @@ const insert = async (codCliente, codAtivo) => connection.query(`
   VALUES (?, ?, 0)
   `, [codCliente, codAtivo]);
 
-const updateQtdeAtivo = async (codAtivo, qtdeAtivo) => connection.query(`
+const updateAssetQty = async (codAtivo, qtdeAtivo) => connection.query(`
   UPDATE ativos
   SET qtdeAtivo = ?
   WHERE codAtivo = ?
@@ -32,5 +32,5 @@ module.exports = {
   getByClient,
   getByCode,
   insert,
-  updateQtdeAtivo,
+  updateAssetQty,
 }

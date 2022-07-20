@@ -1,10 +1,10 @@
-const investimentosServices = require('../services/investimentos');
+const investmentsServices = require('../services/investimentos');
 
 const buy = async (req, res, next) => {
   const { codCliente, codAtivo, qtdeAtivo } = req.body;
 
   try {
-    const response = await investimentosServices.buy(codCliente, codAtivo, qtdeAtivo);
+    const response = await investmentsServices.buy(codCliente, codAtivo, qtdeAtivo);
 
     if (response.status) {
       return res.status(response.status).json({ message: response.message });
@@ -20,7 +20,7 @@ const sell = async (req, res, next) => {
   const { codCliente, codAtivo, qtdeAtivo } = req.body;
 
   try {
-    const response = await investimentosServices.sell(codCliente, codAtivo, qtdeAtivo);
+    const response = await investmentsServices.sell(codCliente, codAtivo, qtdeAtivo);
 
     if (response.status) {
       return res.status(response.status).json({ message: response.message });
