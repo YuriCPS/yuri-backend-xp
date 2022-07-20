@@ -24,9 +24,15 @@ const buy = async (codCliente, codAtivo, qtdeAtivo)=> {
       message: `Saldo atual de R$ ${balance[0].Saldo} é insuficiente para realizar a compra de R$ ${ativo[0].Valor * qtdeAtivo}`,
     }
   }
-  const [ativosDoCliente] = await ativosModel.getByClient(codCliente);
-  const ativoCompra = ativosDoCliente.find(ativo => ativo.codAtivo === codAtivo);
-  const total = Number(ativo[0].Valor * qtdeAtivo);
+  let [ativosDoCliente] = await ativosModel.getByClient(codCliente);
+  let ativoCompra = ativosDoCliente.find(ativo => ativo.codAtivo === codAtivo);
+  if (!ativoCompra) {
+    await ativosModel.insert(codCliente, codAtivo);
+    [ativosDoCliente] = await ativosModel.getByClient(codCliente);
+    ativoCompra = ativosDoCliente.find(ativo => ativo.codAtivo === codAtivo);
+  }
+
+  const total = Number(ativo[0].Valor * qtdeAtivo).toFixed(2);
   const newBalance = (Number(balance[0].Saldo) - total).toFixed(2);
   const newQtdeAtivo = Number(ativo[0].QtdeAtivo) - qtdeAtivo;
   const newQtdeAtivoCompra = Number(ativoCompra.QtdeAtivo) + qtdeAtivo;
