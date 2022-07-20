@@ -16,8 +16,15 @@ const getByCode = async (codAtivo) => connection.query(`
   WHERE codAtivo = ?
   `, [codAtivo]);
 
+const updateQtdeAtivo = async (codAtivo, qtdeAtivo) => connection.query(`
+  UPDATE ativos
+  SET qtdeAtivo = ?
+  WHERE codAtivo = ?
+  `, [qtdeAtivo, codAtivo]);
+  
 module.exports = {
   getAll,
   getByClient,
   getByCode,
+  updateQtdeAtivo,
 }
