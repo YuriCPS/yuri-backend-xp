@@ -11,13 +11,13 @@ const getClient = async (codCliente) => connection.query(`
   `, [codCliente]);
 
 const updateMovimentation = async (codCliente, type, value) => connection.query(`
-  INSERT INTO movimentacoes (codCliente, Tipo, Valor)
+  INSERT INTO movimentacoes (codCliente, tipo, valor)
   VALUES (?, ?, ?)
   `, [codCliente, type, value]);
 
 const updateBalance = async (codCliente, newBalance) => connection.query(`
   UPDATE contas
-  SET Saldo = ?
+  SET saldo = ?
   WHERE codConta = ?
   `, [newBalance, codCliente]);
 

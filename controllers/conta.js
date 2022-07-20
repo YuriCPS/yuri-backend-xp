@@ -1,10 +1,10 @@
-const contaServices = require('../services/conta');
+const accountServices = require('../services/conta');
 
 const getBalance = async (req, res, next) => {
   const { codCliente } = req.params;
 
   try {
-    const response = await contaServices.getBalance(codCliente);
+    const response = await accountServices.getBalance(codCliente);
 
     return res.status(200).json(response);
   } catch (error) {
@@ -16,7 +16,7 @@ const deposit = async (req, res, next) => {
   const { codCliente, valor } = req.body;
 
   try {
-    const response = await contaServices.deposit(codCliente, valor);
+    const response = await accountServices.deposit(codCliente, valor);
 
     return res.status(200).json(response);
   } catch (error) {
@@ -28,7 +28,7 @@ const withdraw = async (req, res, next) => {
   const { codCliente, valor } = req.body;
 
   try {
-    const response = await contaServices.withdraw(codCliente, valor);
+    const response = await accountServices.withdraw(codCliente, valor);
 
     if (response.status) {
       return res.status(response.status).json({ message: response.message });

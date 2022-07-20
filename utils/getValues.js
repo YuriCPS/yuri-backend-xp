@@ -1,16 +1,16 @@
-module.exports = (client, all) => {
-  const ativosWithValues = [];
+module.exports = (clientAssets, all) => {
+  const assetsWithValues = [];
 
-  client.forEach(ativoClient => {
-    ativosWithValues.push(
+  clientAssets.forEach(clientAsset => {
+    assetsWithValues.push(
       {
-        codCliente: ativoClient.codCliente,
-        codAtivo: ativoClient.codAtivo,
-        QtdeAtivo: ativoClient.QtdeAtivo,
-        Valor: all.find(ativo => ativo.codAtivo === ativoClient.codAtivo).Valor
+        codCliente: clientAsset.codCliente,
+        codAtivo: clientAsset.codAtivo,
+        qtdeAtivo: clientAsset.qtdeAtivo,
+        valor: all.find(asset => asset.codAtivo === clientAsset.codAtivo).valor
       }
     );
   });
 
-  return ativosWithValues;
+  return assetsWithValues;
 }
