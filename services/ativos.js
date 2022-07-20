@@ -1,10 +1,10 @@
-const ativosModel = require('../models/ativos');
+const assetsModels = require('../models/ativos');
 
-const getAll = () => ativosModel.getAll();
+const getAll = () => assetsModels.getAll();
 
-const getByClient = (codCliente) => ativosModel.getByClient(codCliente);
+const getByClient = (codCliente) => assetsModels.getByClient(codCliente);
 
-const getByCode = (codAtivo) => ativosModel.getByCode(codAtivo);
+const getByCode = (codAtivo) => assetsModels.getByCode(codAtivo);
 
 module.exports = {
   getAll,

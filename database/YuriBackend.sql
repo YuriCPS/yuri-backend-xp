@@ -5,7 +5,7 @@ CREATE DATABASE YuriBackend;
 USE YuriBackend;
 
 CREATE TABLE clientes (
-    codCliente INT NOT NULL auto_increment,
+    codCliente INT NOT NULL AUTO_INCREMENT,
     nomeCliente VARCHAR(30) NOT NULL,
     emailCliente VARCHAR(50) NOT NULL,
     senha VARCHAR(30) NOT NULL,
@@ -15,37 +15,37 @@ CREATE TABLE clientes (
 CREATE TABLE ativos (
     codAtivo VARCHAR(5) NOT NULL,
     nomeAtivo VARCHAR(30) NOT NULL,
-    QtdeAtivo INT NOT NULL,
-    Valor DECIMAL(12,2) NOT NULL,
+    qtdeAtivo INT NOT NULL,
+    valor DECIMAL(12,2) NOT NULL,
     PRIMARY KEY(codAtivo)
 ) ENGINE=INNODB;
 
 CREATE TABLE contas (
     codConta INT NOT NULL,
-    Saldo DECIMAL(12,2) NOT NULL,
+    saldo DECIMAL(12,2) NOT NULL,
     FOREIGN KEY (codConta)
     	REFERENCES clientes (codCliente)
 ) ENGINE=INNODB;
 
 CREATE TABLE movimentacoes (
-    codMovimentacao INT NOT NULL auto_increment,
+    codMovimentacao INT NOT NULL AUTO_INCREMENT,
     codCliente INT NOT NULL,
-    Tipo VARCHAR(30) NOT NULL,
-    Valor DECIMAL(12,2) NOT NULL,
-    Horario DATETIME DEFAULT NOW(),
+    tipo VARCHAR(30) NOT NULL,
+    valor DECIMAL(12,2) NOT NULL,
+    horario DATETIME DEFAULT NOW(),
     PRIMARY KEY(codMovimentacao),
     FOREIGN KEY (codCliente)
     	REFERENCES clientes (codCliente)
 ) ENGINE=INNODB;
 
 CREATE TABLE negociacoes (
-    codNegociacao INT NOT NULL auto_increment,
+    codNegociacao INT NOT NULL AUTO_INCREMENT,
     codCliente INT NOT NULL,
     codAtivo VARCHAR(5) NOT NULL,
-    Tipo VARCHAR(30) NOT NULL,
-    QtdeAtivo INT NOT NULL,
-    Valor DECIMAL(12,2) NOT NULL,
-    Horario DATETIME DEFAULT NOW(),
+    tipo VARCHAR(30) NOT NULL,
+    qtdeAtivo INT NOT NULL,
+    valor DECIMAL(12,2) NOT NULL,
+    horario DATETIME DEFAULT NOW(),
     PRIMARY KEY(codNegociacao),
     FOREIGN KEY (codCliente)
     	REFERENCES clientes (codCliente),
@@ -56,7 +56,7 @@ CREATE TABLE negociacoes (
 CREATE TABLE carteiras (
     codCliente INT NOT NULL,
     codAtivo VARCHAR(5) NOT NULL,
-    QtdeAtivo INT NOT NULL,
+    qtdeAtivo INT NOT NULL,
     FOREIGN KEY (codCliente)
     	REFERENCES clientes (codCliente),
     FOREIGN KEY (codAtivo)
@@ -72,7 +72,7 @@ INSERT INTO YuriBackend.clientes (nomeCliente, emailCliente, senha) VALUES
     ("Fernando", "fernando@gmail.com", "senha123"),
     ("José", "jose@xpinc.com", "senha123");
 
-INSERT INTO YuriBackend.ativos (codAtivo, nomeAtivo, QtdeAtivo, Valor) VALUES
+INSERT INTO YuriBackend.ativos (codAtivo, nomeAtivo, qtdeAtivo, valor) VALUES
 	("PETR3", "PETROBRAS ON N2", 500, 30.27 ),
     ("VALE3", "VALE ON NM", 500, 67.81 ),
     ("ABEV3", "AMBEV S/A ON", 500, 14.69 ),
@@ -86,20 +86,20 @@ INSERT INTO YuriBackend.ativos (codAtivo, nomeAtivo, QtdeAtivo, Valor) VALUES
     ("ITSA3", "ITAUSA ON N1", 500, 8.76 ),
     ("BPAC3", "BTGP BANCO ON N2", 500, 12.22 );
 
-INSERT INTO YuriBackend.contas (codConta, Saldo) VALUES
+INSERT INTO YuriBackend.contas (codConta, saldo) VALUES
     (1, 2170.50),
     (2, 5789.82),
     (3, 8709.74),
     (4, 8098.24);
 
-INSERT INTO YuriBackend.movimentacoes (codCliente, Tipo, Valor) VALUES
+INSERT INTO YuriBackend.movimentacoes (codCliente, tipo, valor) VALUES
     (1, "deposito", 2170.50),
     (2, "deposito", 5789.82),
     (3, "deposito", 8709.74),
     (4, "deposito", 9098.24),
     (4, "saque", 1000.00);
 
-INSERT INTO YuriBackend.negociacoes (codCliente, codAtivo, Tipo, QtdeAtivo, Valor) VALUES
+INSERT INTO YuriBackend.negociacoes (codCliente, codAtivo, tipo, qtdeAtivo, valor) VALUES
     (1, "PETR3", "compra", 10, 302.70),
     (1, "VALE3", "compra", 10, 678.10),
     (1, "ABEV3", "compra", 10, 146.90),
@@ -107,7 +107,7 @@ INSERT INTO YuriBackend.negociacoes (codCliente, codAtivo, Tipo, QtdeAtivo, Valo
     (2, "BBDC3", "compra", 10, 137.90),
     (2, "WEGE3", "compra", 10, 266.50);
 
-INSERT INTO YuriBackend.carteiras (codCliente, codAtivo, QtdeAtivo) VALUES
+INSERT INTO YuriBackend.carteiras (codCliente, codAtivo, qtdeAtivo) VALUES
     (1, "PETR3", 5),
     (1, "VALE3", 10),
     (1, "ABEV3", 10),
