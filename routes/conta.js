@@ -7,6 +7,7 @@ const clientValidation = require('../middlewares/validations/cliente');
 const router = express.Router();
 
 router.get('/:codCliente', tokenValidation, clientValidation, account.getBalance);
+router.get('/extrato/:codCliente', tokenValidation, clientValidation, account.getMovimentation);
 
 router.post('/deposito', tokenValidation, valueValidation, clientValidation, account.deposit);
 router.post('/saque', tokenValidation, valueValidation, clientValidation, account.withdraw);

@@ -12,6 +12,18 @@ const getBalance = async (req, res, next) => {
   }
 }
 
+const getMovimentation = async (req, res, next) => {
+  const { codCliente } = req.params;
+
+  try {
+    const response = await accountServices.getMovimentation(codCliente);
+
+    return res.status(200).json(response);
+  } catch (error) {
+    next(error);
+  }
+}
+
 const deposit = async (req, res, next) => {
   const { codCliente, valor } = req.body;
 
@@ -42,6 +54,7 @@ const withdraw = async (req, res, next) => {
 
 module.exports = {
   getBalance,
+  getMovimentation,
   deposit,
   withdraw,
 }

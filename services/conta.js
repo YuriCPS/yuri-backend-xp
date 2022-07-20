@@ -12,6 +12,12 @@ const getBalance = async (codCliente) => {
   };
 }
 
+const getMovimentation = async (codCliente) => {
+  const [movimentation] = await accountModels.getMovimentation(codCliente);
+
+  return movimentation;
+}
+
 const deposit = async (codCliente, valor) => {
   const [balance] = await accountModels.getBalance(codCliente);
   const decimalValue = Number(valor)
@@ -54,6 +60,7 @@ const withdraw = async (codCliente, valor) => {
 
 module.exports = {
   getBalance,
+  getMovimentation,
   deposit,
   withdraw,
 }

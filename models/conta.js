@@ -10,6 +10,11 @@ const getClient = async (codCliente) => connection.query(`
   WHERE codCliente = ?
   `, [codCliente]);
 
+const getMovimentation = async (codCliente) => connection.query(`
+  SELECT * FROM movimentacoes
+  WHERE codCliente = ?
+  `, [codCliente]);
+
 const updateMovimentation = async (codCliente, type, value) => connection.query(`
   INSERT INTO movimentacoes (codCliente, tipo, valor)
   VALUES (?, ?, ?)
@@ -24,6 +29,7 @@ const updateBalance = async (codCliente, newBalance) => connection.query(`
 module.exports = {
   getBalance,
   getClient,
+  getMovimentation,
   updateMovimentation,
   updateBalance,
 }
