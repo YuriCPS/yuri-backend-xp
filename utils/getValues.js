@@ -1,13 +1,13 @@
-module.exports = (clientAssets, all) => {
+module.exports = (clientAssets, allAssets) => {
   const assetsWithValues = [];
 
-  clientAssets.forEach(clientAsset => {
+  clientAssets.map(clientAsset => {
     assetsWithValues.push(
       {
         codCliente: clientAsset.codCliente,
         codAtivo: clientAsset.codAtivo,
         qtdeAtivo: clientAsset.qtdeAtivo,
-        valor: all.find(asset => asset.codAtivo === clientAsset.codAtivo).valor
+        valor: allAssets.find(asset => asset.codAtivo === clientAsset.codAtivo).valor,
       }
     );
   });
