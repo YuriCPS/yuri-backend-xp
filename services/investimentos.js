@@ -1,30 +1,25 @@
 const assetsModels = require('../models/ativos');
 const accountModels = require('../models/conta');
 const investmentsModels = require('../models/investimentos');
+const verifyAssetQty = require('../utils/verifyAssetQty');
+const verifyClientBalance = require('../utils/verifyClientBalance');
 
 const buy = async (codCliente, codAtivo, qtdeAtivo)=> {
+  // Verifica se o ativo existe e se tem quantidade disponível
   const [asset] = await assetsModels.getByCode(codAtivo);
-  if (asset.length === 0) {
-    return {
-      status:404,
-      message: `Ativo não encontrado, verifique o código do ativo`,
-    }
-  }
-  if (qtdeAtivo > asset[0].qtdeAtivo) {
-    return {
-      status:400,
-      message: `Quantidade de ativos disponíveis insuficiente para essa compra`,
-    }
+  const verifyQty = verifyAssetQty(asset, qtdeAtivo);
+  if (verifyQty.status) {
+    return verifyQty;
   }
 
+  // Verifica se o cliente tem saldo suficiente para a compra
   const [balance] = await accountModels.getBalance(codCliente);
-  if (balance[0].saldo < asset[0].valor * qtdeAtivo) {
-    return {
-      status:406,
-      message: `Saldo atual de R$ ${balance[0].saldo} é insuficiente para realizar a compra de R$ ${asset[0].valor * qtdeAtivo}`,
-    }
+  const verifyBalance = verifyClientBalance(asset, balance, qtdeAtivo);
+  if (verifyBalance.status) {
+    return verifyBalance;
   }
 
+  // Verifica se o cliente já possui o ativo em sua carteira, se não, cria um novo registro
   let [clientAssets] = await assetsModels.getByClient(codCliente);
   let assetToBuy = clientAssets.find(asset => asset.codAtivo === codAtivo);
   if (!assetToBuy) {
@@ -38,15 +33,27 @@ const buy = async (codCliente, codAtivo, qtdeAtivo)=> {
   const newAssetQty = Number(asset[0].qtdeAtivo) - qtdeAtivo;
   const newAssetQtyToBuy = Number(assetToBuy.qtdeAtivo) + qtdeAtivo;
 
-  await accountModels.updateBalance(codCliente, newBalance);
-  await accountModels.updateMovimentation(codCliente, "compra", total);
-  await assetsModels.updateAssetQty(codAtivo, newAssetQty);
-  await investmentsModels.updateWallet(codCliente, codAtivo, newAssetQtyToBuy);
-  await investmentsModels.updateNegotiation(codCliente, codAtivo, "compra", qtdeAtivo, total);
+  const result = Promise.all([
+    accountModels.updateBalance(codCliente, newBalance),
+    accountModels.updateMovimentation(codCliente, "compra", total),
+    assetsModels.updateAssetQty(codAtivo, newAssetQty),
+    investmentsModels.updateWallet(codCliente, codAtivo, newAssetQtyToBuy),
+    investmentsModels.updateNegotiation(codCliente, codAtivo, "compra", qtdeAtivo, total),
+    ]).then(() => {
+      return {
+        message: `Compra de ${qtdeAtivo}x ${codAtivo} por R$ ${total} realizada com sucesso`,
+        saldoAnterior: balance[0].saldo,
+        saldo: newBalance,
+      };
+    }).catch(err => {
+      console.log(err);
+      return {
+        status: 500,
+        message: `Erro ao realizar a compra de ${qtdeAtivo}x ${codAtivo} por R$ ${total}`,
+      };
+    });
 
-  return {
-    message: `Compra de ${qtdeAtivo}x ${codAtivo} por R$ ${total} realizada com sucesso`,
-  }
+  return result;
 }
 
 const sell = async (codCliente, codAtivo, qtdeAtivo)=> {
@@ -76,15 +83,27 @@ const sell = async (codCliente, codAtivo, qtdeAtivo)=> {
   const newAssetQty = Number(asset[0].qtdeAtivo) + qtdeAtivo;
   const newAssetQtyToSell = Number(assetToSell.qtdeAtivo) - qtdeAtivo;
 
-  await accountModels.updateBalance(codCliente, newBalance);
-  await accountModels.updateMovimentation(codCliente, "venda", total);
-  await assetsModels.updateAssetQty(codAtivo, newAssetQty);
-  await investmentsModels.updateWallet(codCliente, codAtivo, newAssetQtyToSell);
-  await investmentsModels.updateNegotiation(codCliente, codAtivo, "venda", qtdeAtivo, total);
+  const result = Promise.all([
+    accountModels.updateBalance(codCliente, newBalance),
+    accountModels.updateMovimentation(codCliente, "venda", total),
+    assetsModels.updateAssetQty(codAtivo, newAssetQty),
+    investmentsModels.updateWallet(codCliente, codAtivo, newAssetQtyToSell),
+    investmentsModels.updateNegotiation(codCliente, codAtivo, "venda", qtdeAtivo, total),
+    ]).then(() => {
+      return {
+        message: `Venda de ${qtdeAtivo}x ${codAtivo} por R$ ${total} realizada com sucesso`,
+        saldoAnterior: balance[0].saldo,
+        saldo: newBalance,
+      };
+    }).catch(err => {
+      console.log(err);
+      return {
+        status: 500,
+        message: `Erro ao realizar a venda de ${qtdeAtivo}x ${codAtivo} por R$ ${total}`,
+      };
+    });
 
-  return {
-    message: `Venda de ${qtdeAtivo}x ${codAtivo} por R$ ${total} realizada com sucesso`,
-  }
+  return result;
 }
 
 module.exports = {
