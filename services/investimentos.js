@@ -1,22 +1,17 @@
 const assetsModels = require('../models/ativos');
 const accountModels = require('../models/conta');
 const investmentsModels = require('../models/investimentos');
-const verifyAssetQty = require('../utils/verifyAssetQty');
-const verifyClientBalance = require('../utils/verifyClientBalance');
+const buyValidation = require('../utils/buyValidation');
+const sellValidation = require('../utils/sellValidation');
 
 const buy = async (codCliente, codAtivo, qtdeAtivo)=> {
-  // Verifica se o ativo existe e se tem quantidade disponível
   const [asset] = await assetsModels.getByCode(codAtivo);
-  const verifyQty = verifyAssetQty(asset, qtdeAtivo);
-  if (verifyQty.status) {
-    return verifyQty;
-  }
-
-  // Verifica se o cliente tem saldo suficiente para a compra
   const [balance] = await accountModels.getBalance(codCliente);
-  const verifyBalance = verifyClientBalance(asset, balance, qtdeAtivo);
-  if (verifyBalance.status) {
-    return verifyBalance;
+
+  // Verifica se o ativo existe e se tem quantidade disponível
+  const verifyPurchase = buyValidation(asset, balance, qtdeAtivo);
+  if (verifyPurchase.status) {
+    return verifyPurchase;
   }
 
   // Verifica se o cliente já possui o ativo em sua carteira, se não, cria um novo registro
@@ -58,24 +53,14 @@ const buy = async (codCliente, codAtivo, qtdeAtivo)=> {
 
 const sell = async (codCliente, codAtivo, qtdeAtivo)=> {
   const [clientAssets] = await assetsModels.getByClient(codCliente);
-  if (clientAssets.length === 0) {
-    return {
-      status:404,
-      message: `O cliente não possui ativos em sua carteira`,
-    }
-  }
-
   const assetToSell = clientAssets.find(asset => asset.codAtivo === codAtivo);
-  if (!assetToSell) {
-    return { status:404, message: `Ativo não encontrado ou o cliente não possui esse ativo` };
+
+  // Verifica se o cliente possui o ativo em sua carteira e se tem quantidade disponível
+  const verifySale = sellValidation(clientAssets, assetToSell, qtdeAtivo);
+  if (verifySale.status) {
+    return verifySale;
   }
 
-  if (qtdeAtivo > assetToSell.qtdeAtivo) {
-    return {
-      status:400,
-      message: `Quantidade de ativos em carteira insuficiente para essa venda`,
-    }
-  }
   const [asset] = await assetsModels.getByCode(codAtivo);
   const [balance] = await accountModels.getBalance(codCliente);
   const total = Number(asset[0].valor * qtdeAtivo);
