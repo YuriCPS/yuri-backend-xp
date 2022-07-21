@@ -7,6 +7,7 @@ const sellValidation = require('../utils/sellValidation');
 const buy = async (codCliente, codAtivo, qtdeAtivo)=> {
   const [asset] = await assetsModels.getByCode(codAtivo);
   const [balance] = await accountModels.getBalance(codCliente);
+  codAtivo = codAtivo.toUpperCase();
 
   // Verifica se o ativo existe e se tem quantidade disponível
   const verifyPurchase = buyValidation(asset, balance, qtdeAtivo);
@@ -54,6 +55,7 @@ const buy = async (codCliente, codAtivo, qtdeAtivo)=> {
 const sell = async (codCliente, codAtivo, qtdeAtivo)=> {
   const [clientAssets] = await assetsModels.getByClient(codCliente);
   const assetToSell = clientAssets.find(asset => asset.codAtivo === codAtivo);
+  codAtivo = codAtivo.toUpperCase();
 
   // Verifica se o cliente possui o ativo em sua carteira e se tem quantidade disponível
   const verifySale = sellValidation(clientAssets, assetToSell, qtdeAtivo);
