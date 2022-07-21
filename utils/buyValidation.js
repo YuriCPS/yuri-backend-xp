@@ -1,4 +1,5 @@
 module.exports = (asset, balance, qtdeAtivo) => {
+  const total = Number(asset[0].valor * qtdeAtivo).toFixed(2);
   if (asset.length === 0) {
     return {
       status:404,
@@ -13,10 +14,10 @@ module.exports = (asset, balance, qtdeAtivo) => {
     }
   }
 
-  if (balance[0].saldo < asset[0].valor * qtdeAtivo) {
+  if (balance[0].saldo < total) {
     return {
       status:406,
-      message: `Saldo atual de R$ ${balance[0].saldo} é insuficiente para realizar a compra de R$ ${asset[0].valor * qtdeAtivo}`,
+      message: `Saldo atual de R$ ${balance[0].saldo} é insuficiente para realizar a compra de R$ ${total}`,
     }
   }
 
