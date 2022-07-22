@@ -16,11 +16,11 @@ const buy = async (codCliente, codAtivo, qtdeAtivo)=> {
   }
 
   // Verifica se o cliente já possui o ativo em sua carteira, se não, cria um novo registro
-  let [clientAssets] = await assetsModels.getByClient(codCliente);
+  let [clientAssets] = await accountModels.getWallet(codCliente);
   let assetToBuy = clientAssets.find(asset => asset.codAtivo === codAtivo);
   if (!assetToBuy) {
     await assetsModels.insert(codCliente, codAtivo);
-    [clientAssets] = await assetsModels.getByClient(codCliente);
+    [clientAssets] = await accountModels.getWallet(codCliente);
     assetToBuy = clientAssets.find(asset => asset.codAtivo === codAtivo);
   }
 
@@ -53,7 +53,7 @@ const buy = async (codCliente, codAtivo, qtdeAtivo)=> {
 }
 
 const sell = async (codCliente, codAtivo, qtdeAtivo)=> {
-  const [clientAssets] = await assetsModels.getByClient(codCliente);
+  const [clientAssets] = await accountModels.getWallet(codCliente);
   const assetToSell = clientAssets.find(asset => asset.codAtivo === codAtivo);
   codAtivo = codAtivo.toUpperCase();
 

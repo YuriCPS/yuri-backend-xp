@@ -5,12 +5,6 @@ const getAll = async () => connection.query(`
   ORDER BY codAtivo ASC
   `);
 
-const getByClient = async (codCliente) => connection.query(`
-  SELECT * FROM carteiras
-  WHERE codCliente = ?
-  ORDER BY codAtivo ASC
-  `, [codCliente]);
-
 const getByCode = async (codAtivo) => connection.query(`
   SELECT * FROM ativos
   WHERE codAtivo = ?
@@ -29,7 +23,6 @@ const updateAssetQty = async (codAtivo, qtdeAtivo) => connection.query(`
 
 module.exports = {
   getAll,
-  getByClient,
   getByCode,
   insert,
   updateAssetQty,

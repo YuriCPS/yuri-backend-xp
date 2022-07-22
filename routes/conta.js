@@ -8,6 +8,7 @@ const router = express.Router();
 
 router.get('/:codCliente', tokenValidation, clientValidation, account.getBalance);
 router.get('/extrato/:codCliente', tokenValidation, clientValidation, account.getMovimentation);
+router.get('/carteira/:codCliente', tokenValidation, clientValidation, account.getWallet);
 
 router.post('/deposito', tokenValidation, valueValidation, clientValidation, account.deposit);
 router.post('/saque', tokenValidation, valueValidation, clientValidation, account.withdraw);
