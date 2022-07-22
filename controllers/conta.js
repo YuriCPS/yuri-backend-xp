@@ -31,15 +31,14 @@ const getWallet = async (req, res, next) => {
 
   try {
     const [clientAssets] = await accountServices.getWallet(codCliente);
-
-    if (clientAssets.length === 0) {
-      return res.status(404).json({
-        message: 'O cliente não possui algum ativo em sua carteira'
-      });
-    }
-
     const [allAssets] = await assetsServices.getAll();
     const clientAssetsWithValue = getValues(clientAssets, allAssets);
+
+    if (clientAssetsWithValue.length === 0) {
+      return res.status(404).json({
+        message: 'O cliente não possui ativo em sua carteira'
+      });
+    }
 
     return res.status(200).json(clientAssetsWithValue);
   } catch (error) {
