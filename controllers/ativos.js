@@ -28,8 +28,27 @@ const getByCode = async (req, res, next) => {
   }
 }
 
+const getByTicker = async (req, res, next) => {
+  const { ticker } = req.params;
+
+  try {
+    const [asset] = await assetsServices.getByTicker(ticker);
+
+    if (asset.length === 0) {
+      return res.status(404).json({
+        message: 'Ativo não encontrado'
+      });
+    }
+
+    return res.status(200).json(asset);
+  } catch (error) {
+    next(error);
+  }
+}
+
 
 module.exports = {
   getAll,
   getByCode,
+  getByTicker,
 }

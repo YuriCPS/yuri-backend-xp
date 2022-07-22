@@ -7,6 +7,7 @@ module.exports = (clientAssets, allAssets) => {
         {
           codCliente: clientAsset.codCliente,
           codAtivo: clientAsset.codAtivo,
+          ticker: clientAsset.ticker,
           qtdeAtivo: clientAsset.qtdeAtivo,
           valor: allAssets.find(asset => asset.codAtivo === clientAsset.codAtivo).valor,
         }

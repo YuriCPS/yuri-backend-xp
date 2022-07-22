@@ -10,6 +10,11 @@ const getByCode = async (codAtivo) => connection.query(`
   WHERE codAtivo = ?
   `, [codAtivo]);
 
+const getByTicker = async (ticker) => connection.query(`
+  SELECT * FROM ativos
+  WHERE ticker = ?
+  `, [ticker]);
+
 const insert = async (codCliente, codAtivo) => connection.query(`
   INSERT INTO carteiras (codCliente, codAtivo, qtdeAtivo)
   VALUES (?, ?, 0)
@@ -24,6 +29,7 @@ const updateAssetQty = async (codAtivo, qtdeAtivo) => connection.query(`
 module.exports = {
   getAll,
   getByCode,
+  getByTicker,
   insert,
   updateAssetQty,
 }

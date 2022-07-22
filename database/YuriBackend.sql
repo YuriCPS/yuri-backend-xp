@@ -13,7 +13,8 @@ CREATE TABLE clientes (
 ) ENGINE=INNODB;
 
 CREATE TABLE ativos (
-    codAtivo VARCHAR(5) NOT NULL,
+    codAtivo INT NOT NULL AUTO_INCREMENT,
+    ticker VARCHAR(6) NOT NULL,
     nomeAtivo VARCHAR(30) NOT NULL,
     qtdeAtivo INT NOT NULL,
     valor DECIMAL(12,2) NOT NULL,
@@ -23,6 +24,7 @@ CREATE TABLE ativos (
 CREATE TABLE contas (
     codConta INT NOT NULL,
     saldo DECIMAL(12,2) NOT NULL,
+    PRIMARY KEY(codConta),
     FOREIGN KEY (codConta)
     	REFERENCES clientes (codCliente)
 ) ENGINE=INNODB;
@@ -32,7 +34,7 @@ CREATE TABLE movimentacoes (
     codCliente INT NOT NULL,
     tipo VARCHAR(30) NOT NULL,
     valor DECIMAL(12,2) NOT NULL,
-    horario DATETIME DEFAULT NOW(),
+    horario TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY(codMovimentacao),
     FOREIGN KEY (codCliente)
     	REFERENCES clientes (codCliente)
@@ -41,11 +43,12 @@ CREATE TABLE movimentacoes (
 CREATE TABLE negociacoes (
     codNegociacao INT NOT NULL AUTO_INCREMENT,
     codCliente INT NOT NULL,
-    codAtivo VARCHAR(5) NOT NULL,
+    codAtivo INT NOT NULL,
+    ticker VARCHAR(6) NOT NULL,
     tipo VARCHAR(30) NOT NULL,
     qtdeAtivo INT NOT NULL,
     valor DECIMAL(12,2) NOT NULL,
-    horario DATETIME DEFAULT NOW(),
+    horario TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY(codNegociacao),
     FOREIGN KEY (codCliente)
     	REFERENCES clientes (codCliente),
@@ -55,7 +58,8 @@ CREATE TABLE negociacoes (
 
 CREATE TABLE carteiras (
     codCliente INT NOT NULL,
-    codAtivo VARCHAR(5) NOT NULL,
+    codAtivo INT NOT NULL,
+    ticker VARCHAR(6) NOT NULL,
     qtdeAtivo INT NOT NULL,
     FOREIGN KEY (codCliente)
     	REFERENCES clientes (codCliente),
@@ -72,7 +76,7 @@ INSERT INTO YuriBackend.clientes (nomeCliente, emailCliente, senha) VALUES
     ("Fernando", "fernando@gmail.com", "senha123"),
     ("José", "jose@xpinc.com", "senha123");
 
-INSERT INTO YuriBackend.ativos (codAtivo, nomeAtivo, qtdeAtivo, valor) VALUES
+INSERT INTO YuriBackend.ativos (ticker, nomeAtivo, qtdeAtivo, valor) VALUES
 	("PETR3", "PETROBRAS ON N2", 500, 30.27 ),
     ("VALE3", "VALE ON NM", 500, 67.81 ),
     ("ABEV3", "AMBEV S/A ON", 500, 14.69 ),
@@ -99,17 +103,17 @@ INSERT INTO YuriBackend.movimentacoes (codCliente, tipo, valor) VALUES
     (4, "deposito", 9098.24),
     (4, "saque", 1000.00);
 
-INSERT INTO YuriBackend.negociacoes (codCliente, codAtivo, tipo, qtdeAtivo, valor) VALUES
-    (1, "PETR3", "compra", 10, 302.70),
-    (1, "VALE3", "compra", 10, 678.10),
-    (1, "ABEV3", "compra", 10, 146.90),
-    (1, "PETR3", "venda", 5, 151.35 ),
-    (2, "BBDC3", "compra", 10, 137.90),
-    (2, "WEGE3", "compra", 10, 266.50);
+INSERT INTO YuriBackend.negociacoes (codCliente, codAtivo, ticker, tipo, qtdeAtivo, valor) VALUES
+    (1, 1, "PETR3", "compra", 10, 302.70),
+    (1, 2, "VALE3", "compra", 10, 678.10),
+    (1, 3, "ABEV3", "compra", 10, 146.90),
+    (1, 1, "PETR3", "venda", 5, 151.35 ),
+    (2, 5, "BBDC3", "compra", 10, 137.90),
+    (2, 6, "WEGE3", "compra", 10, 266.50);
 
-INSERT INTO YuriBackend.carteiras (codCliente, codAtivo, qtdeAtivo) VALUES
-    (1, "PETR3", 5),
-    (1, "VALE3", 10),
-    (1, "ABEV3", 10),
-    (2, "BBDC3", 10),
-    (2, "WEGE3", 10);
+INSERT INTO YuriBackend.carteiras (codCliente, codAtivo, ticker, qtdeAtivo) VALUES
+    (1, 1, "PETR3", 5),
+    (1, 2, "VALE3", 10),
+    (1, 3, "ABEV3", 10),
+    (2, 5, "BBDC3", 10),
+    (2, 6, "WEGE3", 10);
