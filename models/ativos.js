@@ -15,10 +15,10 @@ const getByTicker = async (ticker) => connection.query(`
   WHERE ticker = ?
   `, [ticker]);
 
-const insert = async (codCliente, codAtivo) => connection.query(`
-  INSERT INTO carteiras (codCliente, codAtivo, qtdeAtivo)
-  VALUES (?, ?, 0)
-  `, [codCliente, codAtivo]);
+const insert = async (codCliente, codAtivo, ticker) => connection.query(`
+  INSERT INTO carteiras (codCliente, codAtivo, ticker, qtdeAtivo)
+  VALUES (?, ?, ?, 0)
+  `, [codCliente, codAtivo, ticker]);
 
 const updateAssetQty = async (codAtivo, qtdeAtivo) => connection.query(`
   UPDATE ativos

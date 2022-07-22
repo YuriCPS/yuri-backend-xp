@@ -7,7 +7,7 @@ const sellValidation = require('../utils/sellValidation');
 const buy = async (codCliente, codAtivo, qtdeAtivo)=> {
   const [asset] = await assetsModels.getByCode(codAtivo);
   const [balance] = await accountModels.getBalance(codCliente);
-  codAtivo = codAtivo.toUpperCase();
+  const ticker = asset[0].ticker;
 
   // Verifica se o ativo existe e se tem quantidade disponível
   const verifyPurchase = buyValidation(asset, balance, qtdeAtivo);
@@ -19,10 +19,11 @@ const buy = async (codCliente, codAtivo, qtdeAtivo)=> {
   let [clientAssets] = await accountModels.getWallet(codCliente);
   let assetToBuy = clientAssets.find(asset => asset.codAtivo === codAtivo);
   if (!assetToBuy) {
-    await assetsModels.insert(codCliente, codAtivo);
+    await assetsModels.insert(codCliente, codAtivo, ticker);
     [clientAssets] = await accountModels.getWallet(codCliente);
     assetToBuy = clientAssets.find(asset => asset.codAtivo === codAtivo);
   }
+
 
   const total = Number(asset[0].valor * qtdeAtivo).toFixed(2);
   const newBalance = (Number(balance[0].saldo) - total).toFixed(2);
@@ -34,10 +35,10 @@ const buy = async (codCliente, codAtivo, qtdeAtivo)=> {
     accountModels.updateMovimentation(codCliente, "compra", total),
     assetsModels.updateAssetQty(codAtivo, newAssetQty),
     investmentsModels.updateWallet(codCliente, codAtivo, newAssetQtyToBuy),
-    investmentsModels.updateNegotiation(codCliente, codAtivo, "compra", qtdeAtivo, total),
+    investmentsModels.updateNegotiation(codCliente, codAtivo, ticker, "compra", qtdeAtivo, total),
     ]).then(() => {
       return {
-        message: `Compra de ${qtdeAtivo}x ${codAtivo} por R$ ${total} realizada com sucesso`,
+        message: `Compra de ${qtdeAtivo}x ${ticker} por R$ ${total} realizada com sucesso`,
         saldoAnterior: balance[0].saldo,
         saldo: newBalance,
       };
@@ -45,7 +46,7 @@ const buy = async (codCliente, codAtivo, qtdeAtivo)=> {
       console.log(err);
       return {
         status: 500,
-        message: `Erro ao realizar a compra de ${qtdeAtivo}x ${codAtivo} por R$ ${total}`,
+        message: `Erro ao realizar a compra de ${qtdeAtivo}x ${ticker} por R$ ${total}`,
       };
     });
 
@@ -55,7 +56,6 @@ const buy = async (codCliente, codAtivo, qtdeAtivo)=> {
 const sell = async (codCliente, codAtivo, qtdeAtivo)=> {
   const [clientAssets] = await accountModels.getWallet(codCliente);
   const assetToSell = clientAssets.find(asset => asset.codAtivo === codAtivo);
-  codAtivo = codAtivo.toUpperCase();
 
   // Verifica se o cliente possui o ativo em sua carteira e se tem quantidade disponível
   const verifySale = sellValidation(clientAssets, assetToSell, qtdeAtivo);
@@ -65,6 +65,7 @@ const sell = async (codCliente, codAtivo, qtdeAtivo)=> {
 
   const [asset] = await assetsModels.getByCode(codAtivo);
   const [balance] = await accountModels.getBalance(codCliente);
+  const ticker = asset[0].ticker;
   const total = Number(asset[0].valor * qtdeAtivo);
   const newBalance = (Number(balance[0].saldo) + total).toFixed(2);
   const newAssetQty = Number(asset[0].qtdeAtivo) + qtdeAtivo;
@@ -75,10 +76,10 @@ const sell = async (codCliente, codAtivo, qtdeAtivo)=> {
     accountModels.updateMovimentation(codCliente, "venda", total),
     assetsModels.updateAssetQty(codAtivo, newAssetQty),
     investmentsModels.updateWallet(codCliente, codAtivo, newAssetQtyToSell),
-    investmentsModels.updateNegotiation(codCliente, codAtivo, "venda", qtdeAtivo, total),
+    investmentsModels.updateNegotiation(codCliente, codAtivo, ticker, "venda", qtdeAtivo, total),
     ]).then(() => {
       return {
-        message: `Venda de ${qtdeAtivo}x ${codAtivo} por R$ ${total} realizada com sucesso`,
+        message: `Venda de ${qtdeAtivo}x ${ticker} por R$ ${total} realizada com sucesso`,
         saldoAnterior: balance[0].saldo,
         saldo: newBalance,
       };
@@ -86,7 +87,7 @@ const sell = async (codCliente, codAtivo, qtdeAtivo)=> {
       console.log(err);
       return {
         status: 500,
-        message: `Erro ao realizar a venda de ${qtdeAtivo}x ${codAtivo} por R$ ${total}`,
+        message: `Erro ao realizar a venda de ${qtdeAtivo}x ${ticker} por R$ ${total}`,
       };
     });
 
