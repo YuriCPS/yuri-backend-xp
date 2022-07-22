@@ -45,7 +45,7 @@ const withdraw = async (codCliente, valor) => {
   if (newBalance < 0) {
     return {
       status:406,
-      message: `saldo atual de R$ ${balance[0].saldo} é insuficiente para realizar saque de R$ ${decimalValue}!`,
+      message: `Saldo atual de R$ ${balance[0].saldo} é insuficiente para realizar saque de R$ ${decimalValue}!`,
     }
   }
 
