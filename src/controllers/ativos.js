@@ -15,7 +15,6 @@ const getByCode = async (req, res, next) => {
 
   try {
     const [asset] = await assetsServices.getByCode(codAtivo);
-
     if (asset.length === 0) {
       return res.status(404).json({
         message: 'Ativo não encontrado'
