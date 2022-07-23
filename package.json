@@ -4,7 +4,7 @@
   "description": "Desafio do backend com API e banco de dados pra processo seletivo da turma XP",
   "main": "index.js",
   "scripts": {
-    "test": "nyc --all mocha tests/**/*.js",
+    "test": "nyc --all mocha tests/**/*.js --exit",
     "start": "node index.js",
     "dev": "nodemon index.js",
     "seed": "node src/database/restoreDb.js",

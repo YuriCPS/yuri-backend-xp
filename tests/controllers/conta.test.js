@@ -11,7 +11,7 @@ const clientBalance = {
 	saldo: "2321.85"
 };
 
-const accountBalance = [
+const accountMovimentation = [
 	{
 		codMovimentacao: 1,
 		codCliente: 1,
@@ -90,5 +90,53 @@ describe('Testa o GET em "/conta/:codCliente"', () => {
     expect(res.status.args[0][0]).to.equal(200);
     expect(res.json.calledWith(clientBalance)).to.be.true;
     expect(res.json.args[0][0]).to.deep.equal(clientBalance);
+  });
+});
+
+describe('Testa o GET em "/conta/extrato/:codCliente"', () => {
+  before(() => {
+    req.params = { codCliente: 1 };
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    sinon.stub(accountServices, 'getMovimentation').returns(accountMovimentation);
+  });
+
+  after(() => {
+    accountServices.getMovimentation.restore();
+    sinon.restore();
+  });
+
+  it('Deve retornar status 200 e listar o extrato da conta', async () => {
+    await accountController.getMovimentation(req, res);
+
+    expect(res.status.calledWith(200)).to.be.true;
+    expect(res.status.args[0][0]).to.equal(200);
+    expect(res.json.calledWith(accountMovimentation)).to.be.true;
+    expect(res.json.args[0][0]).to.deep.equal(accountMovimentation);
+  });
+});
+
+describe('Testa o GET em "/conta/carteira/:codCliente"', () => {
+  before(() => {
+    req.params = { codCliente: 1 };
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    sinon.stub(accountServices, 'getWallet').returns([wallet]);
+  });
+
+  after(() => {
+    accountServices.getWallet.restore();
+    sinon.restore();
+  });
+
+  it('Deve retornar status 200 e listar a carteira com os ativos do cliente', async () => {
+    await accountController.getWallet(req, res);
+
+    expect(res.status.calledWith(200)).to.be.true;
+    expect(res.status.args[0][0]).to.equal(200);
+    expect(res.json.calledWith(wallet)).to.be.true;
+    expect(res.json.args[0][0]).to.deep.equal(wallet);
   });
 });
