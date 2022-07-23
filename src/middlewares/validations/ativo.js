@@ -8,7 +8,7 @@ module.exports = (req, res, next) => {
   }
 
   if (isNaN(codAtivo)) {
-    return res.status(400).send({ message: 'O código do ativo precisa um número' });
+    return res.status(400).send({ message: 'O código do ativo deve ser um número' });
   }
 
   return next();

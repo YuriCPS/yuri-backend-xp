@@ -1,11 +1,5 @@
 module.exports = (asset, balance, qtdeAtivo) => {
   const total = Number(asset[0].valor * qtdeAtivo).toFixed(2);
-  if (asset.length === 0) {
-    return {
-      status: 404,
-      message: 'Ativo não encontrado, verifique o código do ativo',
-    };
-  }
 
   if (qtdeAtivo > asset[0].qtdeAtivo) {
     return {
