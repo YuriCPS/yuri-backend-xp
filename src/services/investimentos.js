@@ -4,8 +4,7 @@ const investmentsModels = require('../models/investimentos');
 const buyValidation = require('../utils/buyValidation');
 const sellValidation = require('../utils/sellValidation');
 
-const buy = async (codCliente, codAtivo, qtdeAtivo) => {
-  const [asset] = await assetsModels.getByCode(codAtivo);
+const buy = async (codCliente, codAtivo, asset, qtdeAtivo) => {
   const [balance] = await accountModels.getBalance(codCliente);
   const { ticker } = asset[0];
 
@@ -50,9 +49,9 @@ const buy = async (codCliente, codAtivo, qtdeAtivo) => {
   return result;
 };
 
-const sell = async (codCliente, codAtivo, qtdeAtivo) => {
+const sell = async (codCliente, codAtivo, asset, qtdeAtivo) => {
   const [clientAssets] = await accountModels.getWallet(codCliente);
-  const assetToSell = clientAssets.find((asset) => asset.codAtivo === codAtivo);
+  const assetToSell = clientAssets.find((clientAsset) => clientAsset.codAtivo === codAtivo);
 
   // Verifica se o cliente possui o ativo em sua carteira e se tem quantidade disponível
   const verifySale = sellValidation(clientAssets, assetToSell, qtdeAtivo);
@@ -60,7 +59,6 @@ const sell = async (codCliente, codAtivo, qtdeAtivo) => {
     return verifySale;
   }
 
-  const [asset] = await assetsModels.getByCode(codAtivo);
   const [balance] = await accountModels.getBalance(codCliente);
   const { ticker } = asset[0];
   const total = Number(asset[0].valor * qtdeAtivo);

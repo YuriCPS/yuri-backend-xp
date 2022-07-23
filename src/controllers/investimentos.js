@@ -10,7 +10,7 @@ const buy = async (req, res, next) => {
       return res.status(404).json({ message: 'Ativo não encontrado, verifique o código do ativo' });
     }
 
-    const response = await investmentsServices.buy(codCliente, codAtivo, qtdeAtivo);
+    const response = await investmentsServices.buy(codCliente, codAtivo, asset, qtdeAtivo);
     if (response.status) {
       return res.status(response.status).json({ message: response.message });
     }
@@ -30,7 +30,7 @@ const sell = async (req, res, next) => {
       return res.status(404).json({ message: 'Ativo não encontrado, verifique o código do ativo' });
     }
 
-    const response = await investmentsServices.sell(codCliente, codAtivo, qtdeAtivo);
+    const response = await investmentsServices.sell(codCliente, codAtivo, asset, qtdeAtivo);
     if (response.status) {
       return res.status(response.status).json({ message: response.message });
     }
