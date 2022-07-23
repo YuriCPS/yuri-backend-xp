@@ -1,16 +1,16 @@
 const express = require('express');
-const ativosRouter = require('./routes/ativos');
-const loginRouter = require('./routes/login');
-const investimentosRouter = require('./routes/investimentos');
-const contaRouter = require('./routes/conta');
-const errorMiddleware = require('./middlewares/error');
+const ativosRouter = require('./src/routes/ativos');
+const loginRouter = require('./src/routes/login');
+const investimentosRouter = require('./src/routes/investimentos');
+const contaRouter = require('./src/routes/conta');
+const errorMiddleware = require('./src/middlewares/error');
 
 const app = express();
 
 app.use(express.json());
 
-app.get('/', (_request, response) => {
-  response.send();
+app.get('/', (_req, res) => {
+  res.send();
 });
 
 // Rotas

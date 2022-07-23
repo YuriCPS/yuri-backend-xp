@@ -7,7 +7,7 @@
     "test": "test",
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "seed": "node database/restoreDb.js",
+    "seed": "node src/database/restoreDb.js",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js, .jsx"
   },
   "repository": {

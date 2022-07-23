@@ -10,7 +10,7 @@ const restoreDb = async () => {
         host: MYSQL_HOST,
       });
 
-      await importer.import("./database/YuriBackend.sql");
+      await importer.import("./src/database/YuriBackend.sql");
 
       console.log("Banco de dados restaurado com sucesso!");
 
