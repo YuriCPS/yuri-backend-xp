@@ -15,4 +15,4 @@ const updateWallet = async (codCliente, codAtivo, qtdeAtivo) => connection.query
 module.exports = {
   updateNegotiation,
   updateWallet,
-}
+};

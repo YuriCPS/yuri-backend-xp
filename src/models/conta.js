@@ -39,4 +39,4 @@ module.exports = {
   getMovimentation,
   updateMovimentation,
   updateBalance,
-}
+};

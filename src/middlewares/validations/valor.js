@@ -1,7 +1,7 @@
 module.exports = (req, res, next) => {
   const { valor } = req.body;
 
-  if (!valor){
+  if (!valor) {
     return res.status(400).send({ message: 'O valor precisa ser informado' });
   }
 

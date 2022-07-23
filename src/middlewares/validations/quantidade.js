@@ -1,7 +1,7 @@
 module.exports = (req, res, next) => {
   const { qtdeAtivo } = req.body;
 
-  if (!qtdeAtivo){
+  if (!qtdeAtivo) {
     return res.status(400).send({ message: 'A quantidade precisa ser informada' });
   }
 

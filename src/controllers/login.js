@@ -7,7 +7,7 @@ const login = async (req, res, next) => {
     const response = await loginServices.verifyClient({ email, senha });
 
     if (!response) {
-      return res.status(400).json({ message: "Usuário ou senha inválidos" });
+      return res.status(400).json({ message: 'Usuário ou senha inválidos' });
     }
 
     return res.status(200).json({ token: response });

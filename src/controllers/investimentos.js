@@ -14,7 +14,7 @@ const buy = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
 
 const sell = async (req, res, next) => {
   const { codCliente, codAtivo, qtdeAtivo } = req.body;
@@ -30,9 +30,9 @@ const sell = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
 
 module.exports = {
   buy,
   sell,
-}
+};

@@ -7,8 +7,8 @@ const verifyClient = async ({ email, senha }) => {
     `, [email, senha]);
 
   return clientInfos;
-}
+};
 
 module.exports = {
-  verifyClient
-}
+  verifyClient,
+};

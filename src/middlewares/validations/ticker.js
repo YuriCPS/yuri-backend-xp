@@ -1,7 +1,7 @@
 module.exports = (req, res, next) => {
   const { ticker } = req.params;
 
-  if (!ticker){
+  if (!ticker) {
     return res.status(400).send({ message: 'O ticker do ativo precisa ser informado' });
   }
 

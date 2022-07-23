@@ -10,4 +10,4 @@ module.exports = {
   getAll,
   getByCode,
   getByTicker,
-}
+};

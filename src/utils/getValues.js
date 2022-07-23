@@ -1,7 +1,7 @@
 module.exports = (clientAssets, allAssets) => {
   const assetsWithValues = [];
 
-  clientAssets.forEach(clientAsset => {
+  clientAssets.forEach((clientAsset) => {
     if (clientAsset.qtdeAtivo !== 0) {
       assetsWithValues.push(
         {
@@ -9,11 +9,11 @@ module.exports = (clientAssets, allAssets) => {
           codAtivo: clientAsset.codAtivo,
           ticker: clientAsset.ticker,
           qtdeAtivo: clientAsset.qtdeAtivo,
-          valor: allAssets.find(asset => asset.codAtivo === clientAsset.codAtivo).valor,
-        }
+          valor: allAssets.find((asset) => asset.codAtivo === clientAsset.codAtivo).valor,
+        },
       );
     }
   });
 
   return assetsWithValues;
-}
+};

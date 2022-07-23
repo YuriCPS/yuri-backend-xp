@@ -12,7 +12,7 @@ const getBalance = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
 
 const getMovimentation = async (req, res, next) => {
   const { codCliente } = req.params;
@@ -24,7 +24,7 @@ const getMovimentation = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
 
 const getWallet = async (req, res, next) => {
   const { codCliente } = req.params;
@@ -36,7 +36,7 @@ const getWallet = async (req, res, next) => {
 
     if (clientAssetsWithValue.length === 0) {
       return res.status(404).json({
-        message: 'O cliente não possui ativo em sua carteira'
+        message: 'O cliente não possui ativo em sua carteira',
       });
     }
 
@@ -44,7 +44,7 @@ const getWallet = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
 
 const deposit = async (req, res, next) => {
   const { codCliente, valor } = req.body;
@@ -56,7 +56,7 @@ const deposit = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
 
 const withdraw = async (req, res, next) => {
   const { codCliente, valor } = req.body;
@@ -72,7 +72,7 @@ const withdraw = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
 
 module.exports = {
   getBalance,
@@ -80,4 +80,4 @@ module.exports = {
   getWallet,
   deposit,
   withdraw,
-}
+};

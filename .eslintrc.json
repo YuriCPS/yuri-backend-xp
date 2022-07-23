@@ -4,11 +4,17 @@
         "node": true, 
         "es6": true
     },
-    "extends": "eslint:recommended",
+    "extends": [
+        "eslint:recommended",
+        "airbnb-base"
+    ],
     "parserOptions": {
         "ecmaVersion": "latest"
     },
     "rules": {
-        "no-unused-vars": [2, {"args": "all", "argsIgnorePattern": "^_"}]
+        "no-unused-vars": [2, {"args": "all", "argsIgnorePattern": "^_"}],
+        "consistent-return": "off",
+        "no-restricted-globals": "off",
+        "no-console": "warn"
       }
 }

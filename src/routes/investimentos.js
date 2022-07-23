@@ -5,23 +5,24 @@ const clientValidation = require('../middlewares/validations/cliente');
 const assetValidation = require('../middlewares/validations/ativo');
 const qtyValidation = require('../middlewares/validations/quantidade');
 
-
 const router = express.Router();
 
-router.post('/comprar', 
+router.post(
+  '/comprar',
   tokenValidation,
   clientValidation,
   assetValidation,
   qtyValidation,
-  investments.buy
+  investments.buy,
 );
 
-router.post('/vender',
+router.post(
+  '/vender',
   tokenValidation,
   clientValidation,
   assetValidation,
   qtyValidation,
-  investments.sell
+  investments.sell,
 );
 
 module.exports = router;

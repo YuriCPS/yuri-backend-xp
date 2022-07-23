@@ -8,7 +8,7 @@ const clientValidation = (req, res, next) => {
   const codCliente = codClienteParams || codClienteBody;
 
   // O cliente não pode fazer operações para outro cliente
-  if(codCliente === undefined) {
+  if (codCliente === undefined) {
     return res.status(400).send({ message: 'O código do cliente precisa ser informado' });
   }
 
@@ -17,6 +17,6 @@ const clientValidation = (req, res, next) => {
   }
 
   return next();
-}
+};
 
 module.exports = clientValidation;

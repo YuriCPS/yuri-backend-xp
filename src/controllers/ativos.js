@@ -8,7 +8,7 @@ const getAll = async (_req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
 
 const getByCode = async (req, res, next) => {
   const { codAtivo } = req.params;
@@ -17,7 +17,7 @@ const getByCode = async (req, res, next) => {
     const [asset] = await assetsServices.getByCode(codAtivo);
     if (asset.length === 0) {
       return res.status(404).json({
-        message: 'Ativo não encontrado'
+        message: 'Ativo não encontrado',
       });
     }
 
@@ -25,7 +25,7 @@ const getByCode = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
 
 const getByTicker = async (req, res, next) => {
   const { ticker } = req.params;
@@ -35,7 +35,7 @@ const getByTicker = async (req, res, next) => {
 
     if (asset.length === 0) {
       return res.status(404).json({
-        message: 'Ativo não encontrado'
+        message: 'Ativo não encontrado',
       });
     }
 
@@ -43,11 +43,10 @@ const getByTicker = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
-
+};
 
 module.exports = {
   getAll,
   getByCode,
   getByTicker,
-}
+};

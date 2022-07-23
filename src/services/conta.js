@@ -10,23 +10,23 @@ const getBalance = async (codCliente) => {
     emailCliente: clientInfos[0].emailCliente,
     saldo: balance[0].saldo,
   };
-}
+};
 
 const getMovimentation = async (codCliente) => {
   const [movimentation] = await accountModels.getMovimentation(codCliente);
 
   return movimentation;
-}
+};
 
 const getWallet = (codCliente) => accountModels.getWallet(codCliente);
 
 const deposit = async (codCliente, valor) => {
   const [balance] = await accountModels.getBalance(codCliente);
-  const decimalValue = Number(valor)
+  const decimalValue = Number(valor);
   const previousBalance = Number(balance[0].saldo);
   const newBalance = (previousBalance + decimalValue).toFixed(2);
 
-  await accountModels.updateMovimentation(codCliente, "deposito", decimalValue);
+  await accountModels.updateMovimentation(codCliente, 'deposito', decimalValue);
   await accountModels.updateBalance(codCliente, newBalance);
 
   return {
@@ -35,7 +35,7 @@ const deposit = async (codCliente, valor) => {
     saldoAnterior: balance[0].saldo,
     saldo: newBalance,
   };
-}
+};
 
 const withdraw = async (codCliente, valor) => {
   const [balance] = await accountModels.getBalance(codCliente);
@@ -44,12 +44,12 @@ const withdraw = async (codCliente, valor) => {
 
   if (newBalance < 0) {
     return {
-      status:406,
+      status: 406,
       message: `Saldo atual de R$ ${balance[0].saldo} é insuficiente para realizar saque de R$ ${decimalValue}!`,
-    }
+    };
   }
 
-  await accountModels.updateMovimentation(codCliente, "saque", decimalValue);
+  await accountModels.updateMovimentation(codCliente, 'saque', decimalValue);
   await accountModels.updateBalance(codCliente, newBalance);
 
   return {
@@ -58,7 +58,7 @@ const withdraw = async (codCliente, valor) => {
     saldoAnterior: balance[0].saldo,
     saldo: newBalance,
   };
-}
+};
 
 module.exports = {
   getBalance,
@@ -66,4 +66,4 @@ module.exports = {
   getWallet,
   deposit,
   withdraw,
-}
+};
