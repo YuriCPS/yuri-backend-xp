@@ -10,7 +10,7 @@ const login = async (req, res, next) => {
       return res.status(400).json({ message: 'Usuário ou senha inválidos' });
     }
 
-    return res.status(200).json({ token: response });
+    return res.status(201).json({ token: response });
   } catch (err) {
     return next(err);
   }
