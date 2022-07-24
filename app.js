@@ -1,4 +1,6 @@
 const express = require('express');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 const ativosRouter = require('./src/routes/ativos');
 const loginRouter = require('./src/routes/login');
 const investimentosRouter = require('./src/routes/investimentos');
@@ -8,6 +10,10 @@ const errorMiddleware = require('./src/middlewares/error');
 const app = express();
 
 app.use(express.json());
+
+// Swagger
+const options = { customCss: '.swagger-ui .topbar { display: none }' };
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 
 app.get('/', (_req, res) => {
   res.send();

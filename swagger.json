@@ -1,0 +1,416 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API do Desafio Backend por Yuri Carvalho",
+    "description": "APi desenvolvida por Yuri Carvalho para o processo seletivo da XP Inc. para a Turma XP da Trybe",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/",
+      "description": "Localhost"
+    },
+    {
+      "url": "https://yuri-backend-api.herokuapp.com/",
+      "description": "Deploy"
+    }
+  ],
+  "basePath": "/",
+  "schemes": [
+    "https"
+  ],
+  "tags": [
+    {
+      "name": "Ativos"
+    },
+    {
+      "name": "Login"
+    },
+    {
+      "name": "Conta",
+      "description": "Todas necessitam de autenticação com token JWT"
+    },
+    {
+      "name": "Investimentos",
+      "description": "Todas necessitam de autenticação com token JWT"
+    }
+  ],
+  "paths": {
+    "/ativos/": {
+      "get": {
+        "summary": "Lista todos os ativos disponíveis na corretora",
+        "tags": [
+          "Ativos"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/ativos/{codAtivo}": {
+      "get": {
+        "summary": "Retorna as informações de um ativo pelo código informado",
+        "tags": [
+          "Ativos"
+        ],
+        "parameters": [
+          {
+            "name": "codAtivo",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/ativos/ticker/{ticker}": {
+      "get": {
+        "summary": "Retorna as informações de um ativo pelo ticker informado",
+        "tags": [
+          "Ativos"
+        ],
+        "parameters": [
+          {
+            "name": "ticker",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/login/": {
+      "post": {
+        "summary": "Faz o login do usuário e retorna o token de autenticação",
+        "tags": [
+          "Login"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "yuri@yahoo.com"
+                },
+                "senha": {
+                  "example": "senha123"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/conta/{codCliente}": {
+      "get": {
+        "summary": "Retorna o saldo do cliente e suas informações",
+        "tags": [
+          "Conta"
+        ],
+        "parameters": [
+          {
+            "name": "codCliente",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/conta/extrato/{codCliente}": {
+      "get": {
+        "summary": "Retorna o extrato da conta do cliente",
+        "tags": [
+          "Conta"
+        ],
+        "parameters": [
+          {
+            "name": "codCliente",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/conta/carteira/{codCliente}": {
+      "get": {
+        "summary": "Lista os ativos que o cliente possui na carteira",
+        "tags": [
+          "Conta"
+        ],
+        "parameters": [
+          {
+            "name": "codCliente",
+            "in": "path",
+            "required": true,
+            "type": "number"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/conta/deposito": {
+      "post": {
+        "summary": "Faz um depósito na conta do cliente",
+        "tags": [
+          "Conta"
+        ],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "valor": {
+                  "example": "1000.00"
+                },
+                "codCliente": {
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/conta/saque": {
+      "post": {
+        "summary": "Faz um saque na conta do cliente",
+        "tags": [
+          "Conta"
+        ],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "valor": {
+                  "example": "750.00"
+                },
+                "codCliente": {
+                  "example": "1"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/investimentos/comprar": {
+      "post": {
+        "summary": "Compra um ativo da corretora para a carteira do cliente",
+        "tags": [
+          "Investimentos"
+        ],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "codCliente": {
+                  "example": 1
+                },
+                "codAtivo": {
+                  "example": 2
+                },
+                "qtdeAtivo": {
+                  "example": 10
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/investimentos/vender": {
+      "post": {
+        "summary": "Vende um ativo da carteira do cliente para a corretora",
+        "tags": [
+          "Investimentos"
+        ],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "codCliente": {
+                  "example": 1
+                },
+                "codAtivo": {
+                  "example": 2
+                },
+                "qtdeAtivo": {
+                  "example": 1
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    }
+  }
+}
