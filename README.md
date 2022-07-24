@@ -18,6 +18,7 @@ Desafio técnico para o processo seletivo da XP Inc. realizado por [Yuri Carvalh
 #### [Documentação com Swagger](https://yuri-backend-api.herokuapp.com/api-docs/)
 
 <br />
+<br />
 
 ## Minhas escolhas para o desafio
 
@@ -41,6 +42,7 @@ Desafio técnico para o processo seletivo da XP Inc. realizado por [Yuri Carvalh
 <br />
 
 ## Experiências durante o desenvolvimento
+
   Ao receber o desafio inicialmente passei algumas horas lendo o documento enviado e pensando em algumas soluções que poderia ser utilizadas, assim como a modelagem do banco de dados, após a modelagem inicial a solução que eu escolhi foi utilizar um ORM como o Sequelize que aprendemos aqui na Trybe, porém eu não tinha utilizado o Sequelize com o TypeScript e após algum tempo vendo como seria eu decidi que faria mais sentido fazer o desenvolvimento da forma que eu me sentisse mais confortável, então eu fiz sem ORM e com JavaScript.
 
   Como falei anteriormente o TypeScript pareceu que não iria ter o melhor custo X benefício, mas em certo momento ele teria sim facilitado algumas coisas e evitado conversões de algumas variáveis para garantir que não ocorressem erros, como por exemplo, a conversão de um número para string, ou a conversão de um string para um número que precisei fazer em certos pontos do código. Então após finalizar o desenvolvimento acredito que daria pra ter utilizado o TypeScript sem grandes problemas.
@@ -51,7 +53,20 @@ Desafio técnico para o processo seletivo da XP Inc. realizado por [Yuri Carvalh
 
   Foi muito legal aprender a documentar uma API com o Swagger, embora eu tenha deixado pra aprender no ultimo dia do prazo, acabou dando certo e como falei anteriormente foi uma ótima oportunidade para aprender como funciona o Swagger.
 
+  Fiz algumas alterações na rota para consultar os ativos do cliente, achei que fazia mais sentido vir da conta do cliente, representando sua carteira de ativos, assim como também fiz uma rota para consultar o extrato da conta do cliente, que retorna tanto os saques e depósitos como as entradas e saídas de valores referentes a compras e vendas de ativos.
+
 ---
+</br>
+
+## O que poderia ser melhorado
+
+Com mais tempo disponível faria a refatoração de algumas coisas como a camada de services das rotas de `/investimentos`, acredito que daria pra transformar em TypeScript também.
+
+Outra coisa seria fazer rotas partindo de `/admin` para a criação, edição e exclusão de ativos, clientes e manutenção de maneira geral. Ficaria um CRUD mais completo desta forma.
+
+No extrato também poderia vir no objeto da movimentação de compras e vendas de ativos o id daquela compra ou venda.
+
+___
 <br />
 
 ## Instruções para executar o projeto
@@ -73,7 +88,7 @@ Desafio técnico para o processo seletivo da XP Inc. realizado por [Yuri Carvalh
   ```
 
 #### 2 - Configure as variáveis de ambiente
-  Para configurar as variáveis de ambiente é necessário que você tenha um arquivo chamado .env na raiz do projeto, este arquivo deve conter as seguintes variáveis de ambiente:
+  Para configurar as variáveis de ambiente é necessário que você tenha um arquivo chamado .env na raiz do projeto *(existe um env.example de modelo no repositório)*, este arquivo deve conter as seguintes variáveis de ambiente:
 
   ```txt
   #### VARIAVEIS DO SERVER
@@ -127,17 +142,271 @@ Desafio técnico para o processo seletivo da XP Inc. realizado por [Yuri Carvalh
 <details>
   <summary><strong>GET em <a href=https://yuri-backend-api.herokuapp.com/api-docs/#/Ativos/get_ativos_>/ativos</><a><strong></summary>
 
+  - 🔓 Não é necessário autenticação para acessar esta rota.
 
+  - Retona um JSON com todos os ativos cadastrados no banco de dados.
+
+  ```json
+  [
+	{
+		"codAtivo": 1,
+		"ticker": "PETR3",
+		"nomeAtivo": "PETROBRAS ON N2",
+		"qtdeAtivo": 491,
+		"valor": "30.27"
+	}
+	{
+		"codAtivo": 2,
+		"ticker": "VALE3",
+		"nomeAtivo": "VALE ON NM",
+		"qtdeAtivo": 500,
+		"valor": "67.81"
+	},...
+  ]
+  ```
 </details>
 
 <details>
   <summary><strong>GET em <a href=https://yuri-backend-api.herokuapp.com/api-docs/#/Ativos/get_ativos__codAtivo_>/ativos/{codAtivo}</><a><strong></summary>
 
+  - 🔓 Não é necessário autenticação para acessar esta rota.
 
+  - Retona um JSON com as informações do ativo com o código inserido.
+
+  ```json
+  [
+	{
+		"codAtivo": 1,
+		"ticker": "PETR3",
+		"nomeAtivo": "PETROBRAS ON N2",
+		"qtdeAtivo": 491,
+		"valor": "30.27"
+	}
+  ]
+  ```
 </details>
 
 <details>
   <summary><strong>GET em <a href=https://yuri-backend-api.herokuapp.com/api-docs/#/Ativos/get_ativos_ticker__ticker_>/ativos/ticker/{ticker}</><a><strong></summary>
 
+  - 🔓 Não é necessário autenticação para acessar esta rota.
 
+  - Retona um JSON com as informações do ativo com o ticker inserido.
+
+  ```json
+  [
+	{
+		"codAtivo": 3,
+		"ticker": "ABEV3",
+		"nomeAtivo": "AMBEV S/A ON",
+		"qtdeAtivo": 500,
+		"valor": "14.69"
+	}
+  ]
+  ```
+</details>
+<br />
+
+<details>
+  <summary><strong>POST em <a href=https://yuri-backend-api.herokuapp.com/api-docs/#/Login/post_login_>/login</><a><strong></summary>
+
+  - 🔓 Não é necessário autenticação para acessar esta rota.
+
+  - Espera um JSON com o email e senha do usuário, e retorna um JSON com o token de autenticação.
+
+  ```json
+  {
+	"email": "yuri@yahoo.com",
+	"senha": "senha123"
+  }
+  ```
+
+  ```json
+  {
+	"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb2RDbGllbnRlIjoxLCJub21lQ2xpZW50ZSI6Ill1cmkiLCJlbWFpbENsaWVudGUiOiJ5dXJpQHlhaG9vLmNvbSIsImlhdCI6MTY1ODY5NjgyNywiZXhwIjoxNjU4NzMyODI3fQ.Ec2bcsT50o31NdNKFKoxYgLDm_qxMehE6GE1Jvp8Roo"
+  }
+  ```
+</details>
+<br />
+
+<details>
+  <summary><strong>GET em <a href=https://yuri-backend-api.herokuapp.com/api-docs/#/Conta/get_conta__codCliente_>/conta/{codCliente}</><a><strong></summary>
+
+  - 🔒 É necessário autenticação para acessar esta rota.
+
+  - Retorna um JSON com o saldo da conta do cliente e suas informações.
+
+  ```json
+  {
+	"codCliente": 1,
+	"nomeCliente": "Yuri",
+	"emailCliente": "yuri@yahoo.com",
+	"saldo": "11727.57"
+  }
+  ```
+</details>
+
+<details>
+  <summary><strong>GET em <a href=https://yuri-backend-api.herokuapp.com/api-docs/#/Conta/get_conta_extrato__codCliente_>/conta/extrato/{codCliente}</><a><strong></summary>
+
+  - 🔒 É necessário autenticação para acessar esta rota.
+
+  - Retorna um JSON com o extrato da conta do cliente.
+
+  ```json
+  [
+	{
+		"codMovimentacao": 1,
+		"codCliente": 1,
+		"tipo": "deposito",
+		"valor": "2170.50",
+		"horario": "2022-07-24T17:59:32.000Z"
+	},
+	{
+		"codMovimentacao": 6,
+		"codCliente": 1,
+		"tipo": "deposito",
+		"valor": "10000.00",
+		"horario": "2022-07-24T18:00:58.000Z"
+	},
+	{
+		"codMovimentacao": 7,
+		"codCliente": 1,
+		"tipo": "saque",
+		"valor": "170.50",
+		"horario": "2022-07-24T18:01:06.000Z"
+	},...
+  ]
+  ```
+</details>
+
+<details>
+  <summary><strong>GET em <a href=https://yuri-backend-api.herokuapp.com/api-docs/#/Conta/get_conta_carteira__codCliente_>/conta/carteira/{codCliente}</><a><strong></summary>
+
+  - 🔒 É necessário autenticação para acessar esta rota.
+
+  - Retorna um JSON com a carteira de ativos do cliente.
+
+  ```json
+  [
+	{
+		"codCliente": 1,
+		"codAtivo": 1,
+		"ticker": "PETR3",
+		"qtdeAtivo": 14,
+		"valor": "30.27"
+	},
+	{
+		"codCliente": 1,
+		"codAtivo": 2,
+		"ticker": "VALE3",
+		"qtdeAtivo": 10,
+		"valor": "67.81"
+	},
+	{
+		"codCliente": 1,
+		"codAtivo": 3,
+		"ticker": "ABEV3",
+		"qtdeAtivo": 10,
+		"valor": "14.69"
+	}
+  ]
+  ```
+</details>
+
+<details>
+  <summary><strong>POST em <a href=https://yuri-backend-api.herokuapp.com/api-docs/#/Conta/post_conta_deposito>/conta/deposito</><a><strong></summary>
+
+  - 🔒 É necessário autenticação para acessar esta rota.
+
+  - Espera um JSON com o valor do depósito e o código do cliente, e retorna um JSON com o saldo atualizado.
+
+  ```json
+  {
+	"codCliente": 1,
+	"valor": 10000
+  }
+  ```
+
+  ```json
+  {
+	"codCliente": 1,
+	"message": "Depósito de R$ 10000 realizado com sucesso!",
+	"saldoAnterior": "2170.50",
+	"saldo": "12170.50"
+  }
+  ```
+</details>
+
+<details>
+  <summary><strong>POST em <a href=https://yuri-backend-api.herokuapp.com/api-docs/#/Conta/post_conta_saque>/conta/saque</><a><strong></summary>
+
+  - 🔒 É necessário autenticação para acessar esta rota.
+
+  - Espera um JSON com o valor do saque e o código do cliente, e retorna um JSON com o saldo atualizado.
+
+  ```json
+  {
+	"codCliente": 1,
+	"valor": 170.50
+  }
+  ```
+
+  ```json
+  {
+	"codCliente": 1,
+	"message": "Saque de R$ 170.50 realizado com sucesso!",
+	"saldoAnterior": "12170.50",
+	"saldo": "12000.00"
+  }
+  ```
+</details>
+<br />
+
+<details>
+  <summary><strong>POST em <a href=https://yuri-backend-api.herokuapp.com/api-docs/#/Investimentos/post_investimentos_comprar>/investimentos/comprar</><a><strong></summary>
+
+  - 🔒 É necessário autenticação para acessar esta rota.
+
+  - Espera um JSON com o código do ativo, a quantidade deste e o código do cliente, e retorna um JSON com o saldo atualizado.
+
+  ```json
+  {
+	"codCliente": 1,
+	"codAtivo": 1,
+	"qtdeAtivo": 10
+  }
+  ```
+
+  ```json
+  {
+	"message": "Compra de 10x PETR3 por R$ 302.70 realizada com sucesso",
+	"saldoAnterior": "12000.00",
+	"saldo": "11697.30"
+  }
+  ```
+</details>
+
+<details>
+  <summary><strong>POST em <a href=https://yuri-backend-api.herokuapp.com/api-docs/#/Investimentos/post_investimentos_vender>/investimentos/vender</><a><strong></summary>
+
+  - 🔒 É necessário autenticação para acessar esta rota.
+
+  - Espera um JSON com o código do ativo, a quantidade deste e o código do cliente, e retorna um JSON com o saldo atualizado.
+
+  ```json
+  {
+	"codCliente": 1,
+	"codAtivo": 1,
+	"qtdeAtivo": 1
+  }
+  ```
+
+  ```json
+  {
+	"message": "Venda de 1x PETR3 por R$ 30.27 realizada com sucesso",
+	"saldoAnterior": "11697.30",
+	"saldo": "11727.57"
+  }
+  ```
 </details>
