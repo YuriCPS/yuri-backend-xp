@@ -18,13 +18,14 @@ Desafio técnico para o processo seletivo da XP Inc. realizado por [Yuri Carvalh
 #### [Documentação com Swagger](https://yuri-backend-api.herokuapp.com/api-docs/)
 
 <br />
+
 #### Índice
 
-[Minhas escolhas](#minhas-escolhas-para-o-desafio)
-[Durante o desenvolvimento](#experiências-durante-o-desenvolvimento)
-[O que pode ser melhorado](#o-que-poderia-ser-melhorado)
-[Instruções para executar o projeto](#instruções-para-executar-o-projeto)
-[Rotas da API](#rotas-da-api)
+- [Minhas escolhas](#minhas-escolhas-para-o-desafio)
+- [Durante o desenvolvimento](#experiências-durante-o-desenvolvimento)
+- [O que pode ser melhorado](#o-que-poderia-ser-melhorado)
+- [Instruções para executar o projeto](#instruções-para-executar-o-projeto)
+- [Rotas da API](#rotas-da-api)
 
 ___
 <br />
