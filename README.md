@@ -84,6 +84,8 @@ No extrato também poderia vir no objeto da movimentação de compras e vendas d
 
 Estruturar melhor o banco de dados e criar algumas tabelas pra ampliar as informações que podem se fornecidas.
 
+Não guardar as senhas brutas em texto no banco de dados, mas guardar em hash.
+
 ___
 <br />
 
