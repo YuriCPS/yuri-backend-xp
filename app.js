@@ -12,7 +12,8 @@ const app = express();
 app.use(express.json());
 
 // Swagger
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+const options = { customCss: '.swagger-ui .topbar { display: none }' };
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
 
 app.get('/', (_req, res) => {
   res.send();
