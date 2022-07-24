@@ -38,7 +38,7 @@
   "paths": {
     "/ativos/": {
       "get": {
-        "summary": "Lista todos os ativos",
+        "summary": "Lista todos os ativos disponíveis na corretora",
         "tags": [
           "Ativos"
         ],
@@ -52,7 +52,7 @@
     },
     "/ativos/{codAtivo}": {
       "get": {
-        "summary": "Retorna um ativo pelo código informado",
+        "summary": "Retorna as informações de um ativo pelo código informado",
         "tags": [
           "Ativos"
         ],
@@ -79,7 +79,7 @@
     },
     "/ativos/ticker/{ticker}": {
       "get": {
-        "summary": "Retorna um ativo pelo ticker informado",
+        "summary": "Retorna as informações de um ativo pelo ticker informado",
         "tags": [
           "Ativos"
         ],
@@ -106,7 +106,7 @@
     },
     "/login/": {
       "post": {
-        "summary": "Faz o login do usuário e retorna o token",
+        "summary": "Faz o login do usuário e retorna o token de autenticação",
         "tags": [
           "Login"
         ],
@@ -320,7 +320,7 @@
     },
     "/investimentos/comprar": {
       "post": {
-        "summary": "Compra um ativo para a carteira",
+        "summary": "Compra um ativo da corretora para a carteira do cliente",
         "tags": [
           "Investimentos"
         ],
@@ -367,7 +367,7 @@
     },
     "/investimentos/vender": {
       "post": {
-        "summary": "Vende um ativo da carteira",
+        "summary": "Vende um ativo da carteira do cliente para a corretora",
         "tags": [
           "Investimentos"
         ],
