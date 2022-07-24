@@ -73,6 +73,7 @@ describe('Testa a função deposit() do service de conta', () => {
 
   it('Deve retornar o objeto de resposta', async () => {
     const result = await accountServices.deposit(1, 2170.50);
+
     expect(result).to.be.an('object');
     expect(result).to.have.all.keys('codCliente', 'message', 'saldoAnterior','saldo');
   });
@@ -88,9 +89,10 @@ describe('Testa a função withdraw() do service de conta', () => {
     accountModels.updateMovimentation.restore();
     accountModels.updateBalance.restore();
   });
-  
+
   it('Deve retornar o objeto de resposta', async () => {
     const result = await accountServices.withdraw(1, 10.00);
+
     expect(result).to.be.an('object');
     expect(result).to.have.all.keys('codCliente', 'message', 'saldoAnterior','saldo');
   });

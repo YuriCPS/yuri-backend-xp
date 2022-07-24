@@ -27,6 +27,7 @@ describe('Testa a função buy() do service de investimentos', () => {
 
   it('Deve retornar o objeto de resposta', async () => {
     const result = await investmentsServices.buy(1, 1, asset , 1);
+
     expect(result).to.be.an('object');
     expect(result).to.have.all.keys('message', 'saldoAnterior', 'saldo');
   });
@@ -45,6 +46,7 @@ describe('Testa a função sell() do service de investimentos', () => {
 
   it('Deve retornar o objeto de resposta', async () => {
     const result = await investmentsServices.sell(1, 1, asset , 1);
+
     expect(result).to.be.an('object');
     expect(result).to.have.all.keys('message', 'saldoAnterior', 'saldo');
   });

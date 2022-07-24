@@ -165,7 +165,7 @@ describe('Testa o POST em "/conta/saque', () => {
     expect(res.status.args[0][0]).to.equal(200);
     expect(res.json.calledWith(withdraw)).to.be.true;
     expect(res.json.args[0][0]).to.deep.equal(withdraw);
-  }, after);
+  });
 });
 
 describe('Testa o POST em "/conta/deposito', () => {
@@ -192,5 +192,5 @@ describe('Testa o POST em "/conta/deposito', () => {
     expect(res.status.args[0][0]).to.equal(200);
     expect(res.json.calledWith(deposit)).to.be.true;
     expect(res.json.args[0][0]).to.deep.equal(deposit);
-  }, after);
+  });
 });
