@@ -1,28 +1,41 @@
 # Desafio Backend de Yuri Carvalho
 
-Desafio técnico para o processo seletivo da XP Inc. realizado por Yuri Carvalho
+Desafio técnico para o processo seletivo da XP Inc. realizado por [Yuri Carvalho](https://github.com/yuricps) utilizando:
+
+<div style="display: inline_block">
+  <img align="center" alt="Docker" src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white">
+  <img align="center" alt="Node" src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white">
+  <img align="center" alt="Express" src="https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB">
+  <img align="center" alt="JavaScript" src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+  <img align="center" alt="JWT" src="https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens">
+  <img align="center" alt="MySQL" src="https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white">
+ <img align="center" alt="Swagger" src="https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white">
+</div>
+<br />
+
+#### Link da API: [https://yuri-backend-api.herokuapp.com](https://yuri-backend-api.herokuapp.com/)
+
+#### [Documentação com Swagger](https://yuri-backend-api.herokuapp.com/api-docs/)
 
 <br />
 
 ## Minhas escolhas para o desafio
 
-##### Docker
-  Para o desafio, eu escolhi o Docker, pois facilita a instalação e o desenvolvimento do projeto em qualquer ambiente, reduzindo os problemas de incompatibilidade. Usando docker compose para gerenciar os containers da API e do banco de dados, eu consigo garantir que o projeto funcione em qualquer ambiente.
+<img align="center" alt="Docker" src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white"> Para o desafio, eu escolhi o Docker, pois facilita a instalação e o desenvolvimento do projeto em qualquer ambiente, reduzindo os problemas de incompatibilidade. Usando docker compose para gerenciar os containers da API e do banco de dados, eu consigo garantir que o projeto funcione em qualquer ambiente.
 
-##### NodeJS
-  Eu escolhi o NodeJS, pois é o ambiente mais utilizado no desenvolvimento de aplicações web e foi o que aprendemos aqui na Trybe, desta forma eu ja tinha mais familiaridade e poderia desenvolver melhor aproveitando o conhecimento que já tenho.
+<img align="center" alt="Node" src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white"> Eu escolhi o NodeJS, pois é o ambiente mais utilizado no desenvolvimento de aplicações web e foi o que aprendemos aqui na Trybe, desta forma eu ja tinha mais familiaridade e poderia desenvolver melhor aproveitando o conhecimento que já tenho.
 
-##### Express
-  Escolhi utilizar o Express pois é o framework que também aprendi na Trybe, eu já tenho mais conhecimento sobre ele, assim como também é um framework mais "cru", com o mínimo necessário para o desenvolvimento de uma API sem arquivos e organização predefinidas o que daria mais liberdade para o desenvolvimento, enquanto o AdonisJS por exemplo é um framework que já vem com muita coisa pronta para o desenvolvimento de uma API como token de acesso, autenticação, etc.
+<img align="center" alt="Express" src="https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB"> Escolhi utilizar o Express pois é o framework que também aprendi na Trybe, eu já tenho mais conhecimento sobre ele, assim como também é um framework mais "cru", com o mínimo necessário para o desenvolvimento de uma API sem arquivos e organização predefinidas o que daria mais liberdade para o desenvolvimento, enquanto o AdonisJS por exemplo é um framework que já vem com muita coisa pronta para o desenvolvimento de uma API como token de acesso, autenticação, etc.
 
-##### JavaScript
-  O projeto foi feito em JavaScript porque eu me sinto mais confortável programando com essa linguagem, poderia ser com TypeScript porém começamos a ver TypeScript no inicio deste mês e inicialmente acreditei que adicionaria coisas ao projeto que não seriam necessárias e poderiam dificultar o desenvolvimento em certos casos por eu ainda não ter conhecimento aprofundado e em compatibilidade com pacotes do npm.
+<img align="center" alt="JavaScript" src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> O projeto foi feito em JavaScript porque eu me sinto mais confortável programando com essa linguagem, poderia ser com TypeScript porém começamos a ver TypeScript no inicio deste mês e inicialmente acreditei que adicionaria coisas ao projeto que não seriam necessárias e poderiam dificultar o desenvolvimento em certos casos por eu ainda não ter conhecimento aprofundado e em compatibilidade com pacotes do npm.
 
-##### JSON Web Tokens
-  Eu escolhi o JSON Web Tokens no desenvolvimento da API pra garantir que o usuário não possa acessar algumas rotas da API sem autenticação, aproveitando também que utilizamos o JWT aqui nos projetos da Trybe então eu já tenho um certo conhecimento sobre ele.
+<img align="center" alt="JWT" src="https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens"> Eu escolhi o JSON Web Tokens no desenvolvimento da API pra garantir que o usuário não possa acessar algumas rotas da API sem autenticação, aproveitando também que utilizamos o JWT aqui nos projetos da Trybe então eu já tenho um certo conhecimento sobre ele.
 
-##### MySQL
-  Para o banco de dados utilizei o MySQL por ser o que também utilizamos aqui, sendo o que eu ja tinha praticado, embora não seja tão diferente das outras alternativas existentes.
+<img align="center" alt="MySQL" src="https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=white"> Para o banco de dados utilizei o MySQL por ser o que também utilizamos aqui, sendo o que eu ja tinha praticado, embora não seja tão diferente das outras alternativas existentes.
+
+<img align="center" alt="Swagger" src="https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white"> A documentação da API foi feita utilizando o Swagger, algo que foi novo pra mim pois ainda não tinha visto como que funcionava a documentação de APIs, e foi uma ótima oportunidade para aprender como funciona.
+
+<img align="center" alt="Heroku" src="https://img.shields.io/badge/heroku-%23430098.svg?style=for-the-badge&logo=heroku&logoColor=white"> O deploy foi feito no Heroku pela facilidade de realizar um deploy em Node.js, e também tivemos a oportunidade de praticar deploy em ambientes como o Heroku aqui na Trybe.
 
 ---
 <br />
@@ -35,6 +48,8 @@ Desafio técnico para o processo seletivo da XP Inc. realizado por Yuri Carvalho
   O uso do Docker foi muito importante para realizar alguns testes durante o desenvolvimento como simular uma falha de comunicação ou a queda do banco de dados, também facilitou por remover a necessidade de instalar ferramentas e banco de dados na minha maquina e não fazer o deploy do banco de dados antes de garantir que estava OK, e claro, evitar problemas de compatibilidade com o ambiente dos avaliadores do desafio.
 
   Não usar um ORM acabou facilitando o desenvolvimento evitando que os ajustes que foram necessários fazer a partir da modelagem inicial do banco de dados que foram ocorrendo durante o desenvolvimento foram mais simples e rápidos de fazer do que se eu tivesse usado um ORM.
+
+  Foi muito legal aprender a documentar uma API com o Swagger, embora eu tenha deixado pra aprender no ultimo dia do prazo, acabou dando certo e como falei anteriormente foi uma ótima oportunidade para aprender como funciona o Swagger.
 
 ---
 <br />
@@ -105,3 +120,24 @@ Desafio técnico para o processo seletivo da XP Inc. realizado por Yuri Carvalho
   npm run seed
   ```
 ---
+<br />
+
+## Rotas da API
+
+<details>
+  <summary><strong>GET em <a href=https://yuri-backend-api.herokuapp.com/api-docs/#/Ativos/get_ativos_>/ativos</><a><strong></summary>
+
+
+</details>
+
+<details>
+  <summary><strong>GET em <a href=https://yuri-backend-api.herokuapp.com/api-docs/#/Ativos/get_ativos__codAtivo_>/ativos/{codAtivo}</><a><strong></summary>
+
+
+</details>
+
+<details>
+  <summary><strong>GET em <a href=https://yuri-backend-api.herokuapp.com/api-docs/#/Ativos/get_ativos_ticker__ticker_>/ativos/ticker/{ticker}</><a><strong></summary>
+
+
+</details>
