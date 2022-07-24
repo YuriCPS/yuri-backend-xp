@@ -17,13 +17,31 @@
   ],
   "basePath": "/",
   "schemes": [
-    "http",
     "https"
+  ],
+  "tags": [
+    {
+      "name": "Ativos"
+    },
+    {
+      "name": "Login"
+    },
+    {
+      "name": "Conta",
+      "description": "Todas necessitam de autenticação com token JWT"
+    },
+    {
+      "name": "Investimentos",
+      "description": "Todas necessitam de autenticação com token JWT"
+    }
   ],
   "paths": {
     "/ativos/": {
       "get": {
         "summary": "Lista todos os ativos",
+        "tags": [
+          "Ativos"
+        ],
         "parameters": [],
         "responses": {
           "200": {
@@ -35,6 +53,9 @@
     "/ativos/{codAtivo}": {
       "get": {
         "summary": "Retorna um ativo pelo código informado",
+        "tags": [
+          "Ativos"
+        ],
         "parameters": [
           {
             "name": "codAtivo",
@@ -59,6 +80,9 @@
     "/ativos/ticker/{ticker}": {
       "get": {
         "summary": "Retorna um ativo pelo ticker informado",
+        "tags": [
+          "Ativos"
+        ],
         "parameters": [
           {
             "name": "ticker",
@@ -83,6 +107,9 @@
     "/login/": {
       "post": {
         "summary": "Faz o login do usuário e retorna o token",
+        "tags": [
+          "Login"
+        ],
         "parameters": [
           {
             "name": "body",
@@ -113,6 +140,9 @@
     "/conta/{codCliente}": {
       "get": {
         "summary": "Retorna o saldo do cliente e suas informações",
+        "tags": [
+          "Conta"
+        ],
         "parameters": [
           {
             "name": "codCliente",
@@ -142,6 +172,9 @@
     "/conta/extrato/{codCliente}": {
       "get": {
         "summary": "Retorna o extrato da conta do cliente",
+        "tags": [
+          "Conta"
+        ],
         "parameters": [
           {
             "name": "codCliente",
@@ -171,6 +204,9 @@
     "/conta/carteira/{codCliente}": {
       "get": {
         "summary": "Lista os ativos que o cliente possui na carteira",
+        "tags": [
+          "Conta"
+        ],
         "parameters": [
           {
             "name": "codCliente",
@@ -203,6 +239,9 @@
     "/conta/deposito": {
       "post": {
         "summary": "Faz um depósito na conta do cliente",
+        "tags": [
+          "Conta"
+        ],
         "parameters": [
           {
             "name": "authorization",
@@ -241,6 +280,9 @@
     "/conta/saque": {
       "post": {
         "summary": "Faz um saque na conta do cliente",
+        "tags": [
+          "Conta"
+        ],
         "parameters": [
           {
             "name": "authorization",
@@ -279,6 +321,9 @@
     "/investimentos/comprar": {
       "post": {
         "summary": "Compra um ativo para a carteira",
+        "tags": [
+          "Investimentos"
+        ],
         "parameters": [
           {
             "name": "authorization",
@@ -323,6 +368,9 @@
     "/investimentos/vender": {
       "post": {
         "summary": "Vende um ativo da carteira",
+        "tags": [
+          "Investimentos"
+        ],
         "parameters": [
           {
             "name": "authorization",
