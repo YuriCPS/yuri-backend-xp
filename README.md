@@ -21,10 +21,6 @@ Desafio técnico para o processo seletivo da XP Inc. realizado por [Yuri Carvalh
 
 #### Índice
 
-- [Desafio Backend de Yuri Carvalho](#desafio-backend-de-yuri-carvalho)
-      - [Link da API: https://yuri-backend-api.herokuapp.com](#link-da-api-httpsyuri-backend-apiherokuappcom)
-      - [Documentação com Swagger](#documentação-com-swagger)
-      - [Índice](#índice)
   - [Minhas escolhas para o desafio](#minhas-escolhas-para-o-desafio)
   - [Experiências durante o desenvolvimento](#experiências-durante-o-desenvolvimento)
   - [O que poderia ser melhorado](#o-que-poderia-ser-melhorado)
