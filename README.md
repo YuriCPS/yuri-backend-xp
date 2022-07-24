@@ -21,11 +21,21 @@ Desafio técnico para o processo seletivo da XP Inc. realizado por [Yuri Carvalh
 
 #### Índice
 
-- [Minhas escolhas](#minhas-escolhas-para-o-desafio)
-- [Durante o desenvolvimento](#experiências-durante-o-desenvolvimento)
-- [O que pode ser melhorado](#o-que-poderia-ser-melhorado)
-- [Instruções para executar o projeto](#instruções-para-executar-o-projeto)
-- [Rotas da API](#rotas-da-api)
+- [Desafio Backend de Yuri Carvalho](#desafio-backend-de-yuri-carvalho)
+      - [Link da API: https://yuri-backend-api.herokuapp.com](#link-da-api-httpsyuri-backend-apiherokuappcom)
+      - [Documentação com Swagger](#documentação-com-swagger)
+      - [Índice](#índice)
+  - [Minhas escolhas para o desafio](#minhas-escolhas-para-o-desafio)
+  - [Experiências durante o desenvolvimento](#experiências-durante-o-desenvolvimento)
+  - [O que poderia ser melhorado](#o-que-poderia-ser-melhorado)
+  - [Instruções para executar o projeto](#instruções-para-executar-o-projeto)
+      - [⚠️ Docker e Docker Compose](#️-docker-e-docker-compose)
+      - [1 - Clone o repositório](#1---clone-o-repositório)
+      - [2 - Configure as variáveis de ambiente](#2---configure-as-variáveis-de-ambiente)
+      - [3 - Acesse a pasta do projeto e execute o comando:](#3---acesse-a-pasta-do-projeto-e-execute-o-comando)
+      - [4 - Com os containers iniciados e rodando:](#4---com-os-containers-iniciados-e-rodando)
+  - [O banco de dados](#o-banco-de-dados)
+  - [Rotas da API](#rotas-da-api)
 
 ___
 <br />
@@ -75,6 +85,8 @@ Com mais tempo disponível faria a refatoração de algumas coisas como a camada
 Outra coisa seria fazer rotas partindo de `/admin` para a criação, edição e exclusão de ativos, clientes e manutenção de maneira geral. Ficaria um CRUD mais completo desta forma.
 
 No extrato também poderia vir no objeto da movimentação de compras e vendas de ativos o id daquela compra ou venda.
+
+Estruturar melhor o banco de dados e criar algumas tabelas pra ampliar as informações que podem se fornecidas.
 
 ___
 <br />
@@ -144,6 +156,46 @@ ___
   ```sh
   npm run seed
   ```
+---
+<br />
+
+## O banco de dados
+
+<p align="center">
+  <h4>Estrutura do banco de dados</h4>
+  <img src="/images/banco.png" title="Banco de dados">
+</p>
+
+<p align="center">
+  <h4>Ativos</h4>
+  <img src="/images/ativos.png" title="Banco de dados">
+</p>
+
+<p align="center">
+  <h4>Clientes</h4>
+  <img src="/images/clientes.png" title="Banco de dados">
+</p>
+
+<p align="center">
+  <h4>Contas</h4>
+  <img src="/images/contas.png" title="Banco de dados">
+</p>
+
+<p align="center">
+  <h4>Movimentações</h4>
+  <img src="/images/movimentacoes.png" title="Banco de dados">
+</p>
+
+<p align="center">
+  <h4>Carteiras</h4>
+  <img src="/images/carteiras.png" title="Banco de dados">
+</p>
+
+<p align="center">
+  <h4>Negociações</h4>
+  <img src="/images/negociacoes.png" title="Banco de dados">
+</p>
+
 ---
 <br />
 
