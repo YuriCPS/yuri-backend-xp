@@ -31,7 +31,8 @@
     "express": "^4.18.1",
     "jsonwebtoken": "^8.5.1",
     "mysql-import": "^5.0.21",
-    "mysql2": "^2.3.3"
+    "mysql2": "^2.3.3",
+    "swagger-ui-express": "^4.5.0"
   },
   "devDependencies": {
     "chai": "^4.3.6",
@@ -55,5 +56,5 @@
       "index.js",
       "jest.config.js"
     ]
-   }
+  }
 }

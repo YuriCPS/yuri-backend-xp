@@ -1,0 +1,12 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Backend - Desafio Técnico da XP Inc.",
+    "description": "API desenvolvida para o desafio técnico do processo seletivo da XP Inc. para a Turma XP da Trybe realizado por Yuri Carvalho.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Yuri Carvalho",
+      "email": "yuricps@gmail.com"
+    }
+  }
+}
