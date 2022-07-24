@@ -1,6 +1,6 @@
 # Desafio Backend de Yuri Carvalho
 
-Desafio técnico para o processo seletivo da XP Inc. realizado por [Yuri Carvalho](https://github.com/yuricps) utilizando:
+Desafio técnico para o processo seletivo da XP Inc. realizado por [Yuri Carvalho](https://www.linkedin.com/in/yuricps/) utilizando:
 
 <div style="display: inline_block">
   <img align="center" alt="Docker" src="https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white">
